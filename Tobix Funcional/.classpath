@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Tobix/src"/>
+	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/db2jcc4.jar"/>
+	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javax.mail-1.6.1.jar"/>
+	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hazel/Desktop/javax.servlet-3.0.jar"/>
+	<classpathentry kind="output" path="Tobix/target/classes"/>
+</classpath>
