@@ -13,12 +13,13 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class silohay {
 	static Calendario time = new Calendario();
-	ObtenerInformacion data = new ObtenerInformacion();
+	static ObtenerInformacion data = new ObtenerInformacion();
 
 
 	public static void main(String[] args) throws SQLException, IOException {
 		//System.out.print( time.getHoraActual("9:00:00"));
-		//data
+		String r = data.selectLogIn("heey.arias@gmail.com","hazel");
+		System.out.print(r);
 		
 	}
 		

@@ -62,12 +62,7 @@
 						<div class="" align="center"><a href="registroEncargado.jsp">Encargado</div>						
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
-					
-					<div class="wrap-input100 validate-input" >
-						<span class="label-input100">Registrar Encargado</span>		
-						<div class="" align="center"><a href="registroEncargado.jsp">Encargado</div>						
-						<span class="focus-input100" data-symbol="&#xf190;"></span>
-					</div>
+		
 					<div class="wrap-input100 validate-input" >
 						<span class="label-input100">Estadisticas</span>		
 						<div class="" align="center"><a href="estadisticasComentario.jsp">Consultas </div>						

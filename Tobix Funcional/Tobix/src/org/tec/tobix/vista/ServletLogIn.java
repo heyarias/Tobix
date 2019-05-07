@@ -38,29 +38,27 @@ public class ServletLogIn extends HttpServlet {
 		String password = request.getParameter("password").toString();
 		String tipo = request.getParameter("tipo").toString();
 		ObtenerInformacion info = new ObtenerInformacion();
-		ResultSet puedo = null;
+		String puedo = null;
 		try {
-			 puedo = info.selectLogIn(username, password);
+			puedo = info.selectLogIn(username, password);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 		try {
-			//passwordV = info.selectPassword(username, password);
 			if(puedo!= null) {
-				if(puedo.getString(1).equals("Administrador")) {
+				if(puedo.equals("Administrador")) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("principalAdmin.jsp");
 					dispatcher.forward(request, response);
 					
 				}
-				else if (puedo.getString(1).equals("Usuario")){
+				else if (puedo.equals("Usuario")){
 					RequestDispatcher dispatcher = request.getRequestDispatcher("principalUser.jsp");
 					dispatcher.forward(request, response);				
 				}
 			}
 			else {
-				System.out.println(" no puedes entrar");
+				System.out.println("no puedes entrar");
 			}
 			
 		} catch (Exception e) {

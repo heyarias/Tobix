@@ -18,6 +18,7 @@ public class Asistente extends Persona {
 		super(identificacion,sexo,email,nombre,apellido1,apellido2,entidadProcedencia);
 		this.setContrasenna(contrasenna);
 		insertar.insertarUsuario(identificacion, contrasenna);
+		insertar.insertarUsuarioAlLogIn("Usuario", contrasenna, email);
 		
 	}
 	 public String toString() {

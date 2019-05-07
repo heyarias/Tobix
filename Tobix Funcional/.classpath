@@ -7,6 +7,7 @@
 	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javaee.jar"/>
 	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javax.mail-1.6.1.jar"/>
 	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javax.servlet.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Hazel/Desktop/javax.servlet-3.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="Tobix/target/classes"/>
 </classpath>

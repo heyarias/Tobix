@@ -83,7 +83,7 @@ public class ObtenerInformacion {
 				return hora;
 			}
 			return hora;
-			}
+		}
 		public String getEmail(String id) throws SQLException {
 			String select ="select email from Persona where id ='"+id+"'";
 			ResultSet rs = ejecutarSelect(select);
@@ -93,17 +93,19 @@ public class ObtenerInformacion {
 				return email;
 			}
 			return email;
-			}
-		public java.util.Date selectHoraInicio(int idActividad) throws SQLException, ParseException {
+		}
+		public String selectHoraInicio(String idActividad) throws SQLException, ParseException {
 			String select="select horaInicio from Actividad where idActividad='"+idActividad+"'";
 			ResultSet rs = ejecutarSelect(select);
-			    String hora = rs.getString(1);
-			   DateFormat dateFormat = new SimpleDateFormat ("hh:mm:ss");
-				String hora1 = hora;
-				java.util.Date date1;
-				date1 = dateFormat.parse(hora1);
-				System.out.println(date1);
-				return date1;
+			String hora = rs.getString(1);
+			return hora;
+		}
+		
+		public String selectFecha(String idActividad) throws SQLException, ParseException {
+			String select = "select fecha from Actividad where idActividad='"+idActividad+"'";
+			ResultSet rs = ejecutarSelect(select);
+			String hora = rs.getString(1);
+			return hora;
 		}
 		
 		public ResultSet selectWatsonActividadesFranja(String franja) throws SQLException {
@@ -113,19 +115,20 @@ public class ObtenerInformacion {
 					"on Persona.id= Encargado.idPersona join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
 					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where franjaHorario='"+franja+"'";
-			ResultSet rs=ejecutarSelect(select);
+			ResultSet rs = ejecutarSelect(select);
 			return rs;
 		}
 		
 		public ResultSet selectWatsonActividadesEmpresa(String empresa) throws SQLException {
-			String select="select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia   \r\n" + 
+			String select = "select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia   \r\n" + 
 					"from Actividad join ActividadXEncargados on Actividad.idActividad=ActividadXEncargados.idActividad \r\n" + 
 					"join Encargado on Encargado.idPersona= ActividadXEncargados.idPersona JOIN PERSONA \r\n" + 
 					"on Persona.id= Encargado.idPersona join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
 					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where entidadProcedencia= '"+empresa+"'";
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+			ResultSet rs = ejecutarSelect(select);
+			return rs;	
+		}
 		public ResultSet selectWatsonActividadesTematica(String tematica) throws SQLException {
 			String select="select Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia  from Actividad join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
@@ -186,10 +189,18 @@ public class ObtenerInformacion {
 			ResultSet rs=ejecutarSelect(select);
 			return rs;
 		}
-		public ResultSet selectLogIn(String email, String contrasenia) throws SQLException {
-			String select="select tipo from Login where email= '"+email+"' and contrasenia='"+contrasenia+"'";
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+		
+		public String selectLogIn(String email, String contrasenia) throws SQLException {
+			String select = "select tipo from Login where email= '"+email+"' and contrasenia='"+contrasenia+"'";
+			ResultSet rs = ejecutarSelect(select);
+			String tipo = null;
+			if (rs.next()) {
+			     tipo  = rs.getString(1);
+			    //your logic...
+			}
+			return tipo;
+		}
+	
 		
 		public ResultSet ejecutarSelect(String query) throws SQLException {
 			Statement stmt= con.getConnection().createStatement();

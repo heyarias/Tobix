@@ -19,8 +19,8 @@ public class Actividad implements Ordenable{
 	private String horaFin;
 	private String descripcion;
 	private InsertarInformacion insertar = new InsertarInformacion();
-	private ArrayList<Persona> encargados= new ArrayList<>();
-	private ArrayList<Persona> asistentes= new ArrayList<>();
+	private ArrayList<Persona> encargados= new ArrayList<Persona>();
+	private ArrayList<Persona> asistentes= new ArrayList<Persona>();
 	private ArrayList<Comentario> comentarios = new ArrayList<>();
 	private ObtenerInformacion obtener = new ObtenerInformacion();
 	/**

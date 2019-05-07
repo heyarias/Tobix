@@ -25,7 +25,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-		<form action= "ServletRegistroAsistente" method="get">
+		<form action= "ServletRegistroAsistente" method="post">
 				<span class="contact100-form-title">
 					Tobix Sign up!
 				</span>

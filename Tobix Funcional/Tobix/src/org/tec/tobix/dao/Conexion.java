@@ -9,6 +9,7 @@ public class Conexion {
 		private Connection con;
 		
 		private Conexion() {
+			System.out.println("Conexion");
 			String url = "jdbc:db2://dashdb-txn-sbox-yp-dal09-03.services.dal.bluemix.net:50000/BLUDB";
 			String user = "whb59900";
 			String password = "m3ph3ppzt^f8wqrp";  
@@ -19,6 +20,7 @@ public class Conexion {
 					// Create the connection using the IBM Data Server Driver for JDBC and SQLJ
 					this.con = DriverManager.getConnection (url, user, password);     
 					// Commit changes manually
+					System.out.println("Conexion despues del driver");
 					this.con.setAutoCommit(true);
 				} 
 				catch (ClassNotFoundException e)
@@ -46,10 +48,10 @@ public class Conexion {
 			return instancia;
 		}
 			else {
-			instancia=new Conexion();	
+			instancia = new Conexion();	
 			return instancia;
 			}
-			}
+		}
 		public Connection getConnection() {
 			return this.con;
 			

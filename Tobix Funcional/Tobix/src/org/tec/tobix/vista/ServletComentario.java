@@ -8,7 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.tec.tobix.dao.ObtenerInformacion;
 import org.tec.tobix.logicaNegocio.Comentario;
+import org.tec.tobix.util.Calendario;
+
 import java.sql.Date;
 
 /**
@@ -17,6 +21,8 @@ import java.sql.Date;
 @WebServlet("/ServletComentario")
 public class ServletComentario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Calendario calendar = new Calendario();
+	ObtenerInformacion data = new ObtenerInformacion();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,17 +47,24 @@ public class ServletComentario extends HttpServlet {
 		else {
 			try {
 				//RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-				//dispatcher.forward(request, response);
-				
-				Comentario comentario = new Comentario(mensaje);
-				System.out.println(comentario.toString());
-			}
-			catch(Exception e) {			
+				//dispatcher.forward(request, response);	
+				String hora;
+				hora = data.selectHoraInicio(id);
+				String dia = data.selectFecha(id);
+				if (calendar.diaVrsDia(dia) != true) {
+					if(calendar.horaVrsHora(hora).equals("MAYOR")) {
+						Comentario comentario = new Comentario(mensaje);
+						System.out.println(comentario.toString());
+					}
+				}
+	}
+		catch(Exception e) {			
   			System.out.println(e);
 		}
-	}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("addComentario.jsp");
-		dispatcher.forward(request, response);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("addComentario.jsp");
+			dispatcher.forward(request, response);
+			
+		}
 	}
 }
+		
