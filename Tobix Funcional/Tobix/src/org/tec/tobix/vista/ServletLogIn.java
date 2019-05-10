@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tec.tobix.dao.Conexion;
 import org.tec.tobix.dao.ObtenerInformacion;
 
 /**
@@ -19,6 +20,7 @@ import org.tec.tobix.dao.ObtenerInformacion;
 @WebServlet("/ServletLogIn")
 public class ServletLogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Conexion con = Conexion.getInstance();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -56,6 +58,7 @@ public class ServletLogIn extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("principalUser.jsp");
 					dispatcher.forward(request, response);				
 				}
+				con.setId(username);
 			}
 			else {
 				System.out.println("no puedes entrar");

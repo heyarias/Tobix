@@ -19,8 +19,14 @@
 </head>
 
 <body>
+<form action= "ServletVerActividadesParticidas" method="get">
+<div align= "center"><br><input type="button" onclick = "alert(verga)" class="button" value="Ver Actividades con mi participacion" style="width: 154px; "><br></div>
 
+</form>
 <form action= "ServletComentario" method="get">
+
+
+
 <div class="wrap-input100 validate-input" data-validate="edition is required">
 					<span class="label-input100"> Id Actividad </span>
 					<input class="input100" type="number" id="id" name = "id">

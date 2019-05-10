@@ -39,8 +39,11 @@ public class ServletChatPrincipal extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);	
 		String mensaje;	
+		System.out.println("No Instancia");
 		Watson chat = Watson.getSingletonInstance();
-		mensaje = chat.getWatsonMessage(); 		
+		System.out.println("Instancia");
+		mensaje = chat.getWatsonMessage(); 	
+		System.out.println(mensaje);
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>\r\n" + 
 				"<html>\r\n" + 

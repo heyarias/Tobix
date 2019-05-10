@@ -14,7 +14,7 @@ public class correr {
 		ObtenerInformacion ob=new ObtenerInformacion();
 		int hora, minutos, segundos;
 		
-		ob.selectHoraInicio(1);
+	//	ob.selectHoraInicio(1);
 		
 		
 

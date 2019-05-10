@@ -40,31 +40,37 @@ public class ObtenerInformacion {
 		}
 
 		public ResultSet selectActividadTipo(String tipo) throws SQLException {
-				String select="select * from Actividad where tipo=+'"+tipo+"'";
-				ResultSet rs=ejecutarSelect(select);
+				String select = "select * from Actividad where tipo=+'"+tipo+"'";
+				ResultSet rs = ejecutarSelect(select);
 				return rs;
 		}
 		public ResultSet selectParticipantes(int idActividad) throws SQLException {
-			String select="select nombre from Persona join Participantes on idPersona=idPersona where idActividad="+idActividad;
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+			String select = "select nombre from Persona join Participantes on idPersona=idPersona where idActividad="+idActividad;
+			ResultSet rs = ejecutarSelect(select);
+			return rs;
+		}
 		public ResultSet selectActividadIDNombre() throws SQLException {
-			String select="select idActividad, nombre from Actividad";
-			ResultSet rs=ejecutarSelect(select);
-			return rs;		}
+			String select = "select idActividad, nombre from Actividad";
+			ResultSet rs = ejecutarSelect(select);
+			return rs;		
+		}
 		public ResultSet selectComentarios(int idActividad) throws SQLException {
-			String select="select comentario from Comentario where idActividad="+idActividad;
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+			String select = "select comentario from Comentario where idActividad="+idActividad;
+			ResultSet rs = ejecutarSelect(select);
+			return rs;
+		}
 	
 		public ResultSet selectActividadesPorParticipante(String identificacion) throws SQLException {
-			String select="select Actividad.idActividad, Actividad.nombre from Persona join ActividadXParticipantesConfirmados on id=idPersona join Actividad on ActividadXParticipantesConfirmados.idActividad=Actividad.idActividad where Persona.id='"+identificacion+"'";
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+			String select = "select Actividad.idActividad, Actividad.nombre from Persona join ActividadXParticipantesConfirmados on id=idPersona join Actividad on ActividadXParticipantesConfirmados.idActividad=Actividad.idActividad where Persona.email='"+identificacion+"'";
+			ResultSet rs = ejecutarSelect(select);
+			return rs;
+		}
+		
 		public ResultSet selectActividadPorID(int idActividad) throws SQLException {
-			String select="select idActividad, nombre from Actividad where idActividad= "+idActividad;
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+			String select = "select idActividad, nombre from Actividad where idActividad= "+idActividad;
+			ResultSet rs = ejecutarSelect(select);
+			return rs;
+		}
 		public ResultSet selectDatosActividadPorID(int idActividad) throws SQLException {
 			String select="select idActividad, nombre,horaFinal from Actividad where idActividad= "+idActividad;
 			ResultSet rs=ejecutarSelect(select);
@@ -130,14 +136,18 @@ public class ObtenerInformacion {
 			return rs;	
 		}
 		public ResultSet selectWatsonActividadesTematica(String tematica) throws SQLException {
-			String select="select Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia  from Actividad join BloqueXActividad \r\n" + 
+			String select="select Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia  \r\n" + 
+					"from Actividad join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
 					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque \r\n" + 
 					"join TematicaXBloque on Bloque.IdBloque= TematicaXBloque.idBloque \r\n" + 
 					"join Tematica on Tematica.idTematica=TematicaXBloque.idTematica  \r\n" + 
-					" join ActividadXEncargados on ActividadXEncargados.idPersona= Actividad.idActividad join Encargado on ActividadXEncargados.idPersona= Encargado.idPersona join Persona on Encargado.idPersona= Persona.id where Tematica.nombre='"+tematica+"'";
-			ResultSet rs=ejecutarSelect(select);
-			return rs;}
+					"join ActividadXEncargados on ActividadXEncargados.idActividad= Actividad.idActividad \r\n" + 
+					"join Encargado on ActividadXEncargados.idPersona= Encargado.idPersona \r\n" + 
+					"join Persona on Encargado.idPersona= Persona.id where Tematica.nombre= '"+tematica+"'";
+			ResultSet rs = ejecutarSelect(select);
+			return rs;
+		}
 		
 		public ResultSet selectWatsonActividadesFecha(String date) throws SQLException {
 			String select="select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia   \r\n" + 
@@ -145,7 +155,7 @@ public class ObtenerInformacion {
 					"join Encargado on Encargado.idPersona= ActividadXEncargados.idPersona JOIN PERSONA \r\n" + 
 					"on Persona.id= Encargado.idPersona join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
-					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where tipo='"+date+"'";
+					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where Actividad.fecha='"+date+"'";
 			ResultSet rs=ejecutarSelect(select);
 			return rs;
 		}
@@ -157,18 +167,29 @@ public class ObtenerInformacion {
 					"on Persona.id= Encargado.idPersona join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
 					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where fecha='"+date+"'";
-			ResultSet rs=ejecutarSelect(select);
+			ResultSet rs = ejecutarSelect(select);
 			return rs;
 		
 		}
 		public ResultSet selectEncargados(int idActividad) throws SQLException {
-			String select="select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia   \r\n" + 
+			String select = "select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia   \r\n" + 
 					"from Actividad join ActividadXEncargados on Actividad.idActividad=ActividadXEncargados.idActividad \r\n" + 
 					"join Encargado on Encargado.idPersona= ActividadXEncargados.idPersona JOIN PERSONA \r\n" + 
 					"on Persona.id= Encargado.idPersona join BloqueXActividad \r\n" + 
 					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
 					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where idActividad="+idActividad;
-			ResultSet rs=ejecutarSelect(select);
+			ResultSet rs = ejecutarSelect(select);
+			return rs;
+		}
+		
+		public ResultSet selectActividadXEncargados(String encargado) throws SQLException {
+			String select = "select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia \r\n" + 
+					"from Actividad join ActividadXEncargados on Actividad.idActividad=ActividadXEncargados.idActividad\r\n" + 
+					"join Encargado on Encargado.idPersona= ActividadXEncargados.idPersona JOIN PERSONA \r\n" + 
+					"on Persona.id= Encargado.idPersona join BloqueXActividad \r\n" + 
+					"on Actividad.idActividad=BloqueXActividad.idActividad \r\n" + 
+					"join Bloque on BloqueXActividad.idBloque=Bloque.idBloque where Persona.nombre='"+encargado + "'";
+			ResultSet rs = ejecutarSelect(select);
 			return rs;
 		}
 		

@@ -7,6 +7,7 @@ public class Conexion {
 
 		private static Conexion instancia= new Conexion();
 		private Connection con;
+		public String id;
 		
 		private Conexion() {
 			System.out.println("Conexion");
@@ -45,17 +46,22 @@ public class Conexion {
 
 		public static Conexion getInstance(){
 			if (instancia!=null) {
-			return instancia;
-		}
+				return instancia;
+			}
 			else {
-			instancia = new Conexion();	
-			return instancia;
+				instancia = new Conexion();	
+				return instancia;
 			}
 		}
 		public Connection getConnection() {
 			return this.con;
 			
 		}
+		public void setId(String id) {
+			 this.id = id;
+			
+		}
+		
 	}
 
 

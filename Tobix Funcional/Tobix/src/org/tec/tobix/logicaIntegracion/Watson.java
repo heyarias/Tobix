@@ -30,22 +30,30 @@ public class Watson {
 	{		
 		try
 		{//Set up Assistant service.
+			System.out.println("Private Watson");
 			LogManager.getLogManager().reset();
 			// Set up Assistant service.
+			System.out.println("LogManager");
 			this.option = new IamOptions.Builder()
 				    .apiKey("P3l7eKorVPnyC_Di_bUMlUpF-pb9tBh5ouycErv31lVP")
 				    .build();
+			System.out.println("IamOptions");
+			System.out.println("IamOptions");
 			this.service = new Assistant("2017-09-21", this.option);
+			System.out.println("Assistant");
 		    this.workspaceID = "b3e2886c-9664-4b67-81c7-43530a11a31b";
 			// Start assistant with empty message.
 			this.options = new MessageOptions.Builder(this.workspaceID).build();
+			
 			this.response = this.service.message(this.options).execute();	
+			System.out.println("response");
 		}
 
 		
 		catch (Exception e) 
 	    {
 			System.out.println("NO LO CREA");
+			System.out.println(e);
 			e.printStackTrace();
 		} 
 	   } 

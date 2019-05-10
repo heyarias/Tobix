@@ -12,14 +12,16 @@ import com.ibm.db2.jcc.am.ResultSet;
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class silohay {
-	static Calendario time = new Calendario();
-	static ObtenerInformacion data = new ObtenerInformacion();
+	//static Calendario time = new Calendario();
+	//static ObtenerInformacion data = new ObtenerInformacion();
+	static Watson w = Watson.getSingletonInstance();
 
 
 	public static void main(String[] args) throws SQLException, IOException {
 		//System.out.print( time.getHoraActual("9:00:00"));
-		String r = data.selectLogIn("heey.arias@gmail.com","hazel");
-		System.out.print(r);
+		System.out.print(w.startWatson());
+		//System.out.print(w.askWatson("comentar"));
+		
 		
 	}
 		

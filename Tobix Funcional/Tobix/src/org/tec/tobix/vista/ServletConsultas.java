@@ -55,6 +55,7 @@ public class ServletConsultas extends HttpServlet {
 					System.out.println(filtro);
 					resultado = info.selectWatsonActividadesFecha(filtro);
 					mensaje = crearMensaje(resultado,10);
+					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -90,9 +91,21 @@ public class ServletConsultas extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			else if (consulta.equals("Tematico")) {
+			else if (consulta.equals("Tematica")) {
 				try {
 					resultado = info.selectWatsonActividadesTematica(filtro);
+					System.out.print("Da resultado");
+					mensaje = crearMensaje(resultado,10);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			else if (consulta.equals("Encargado")) {
+				try {
+					resultado = info.selectActividadXEncargados(filtro);
+					System.out.print("Da resultado");
 					mensaje = crearMensaje(resultado,10);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -165,12 +178,13 @@ public class ServletConsultas extends HttpServlet {
 		
 
 public String crearMensaje(ResultSet rs,int atributos) throws SQLException {
-	String mensaje = "";
+	String mensaje = "idk";
+	System.out.println(rs);
 	while(rs.next()) {
 		int i = 1;
-		System.out.println("idk");
 		while(i-1<atributos) {
 			mensaje += rs.getString(i) + " ,";
+			i++;
 		}
 		mensaje += "\n";
 	}
