@@ -30,7 +30,7 @@ public class FlujoWatson {
 		}while (ask != "salir") ;
 	}
 	
-	public String flujoConsultar(MessageResponse ms) throws SQLException {
+	/*public String flujoConsultar(MessageResponse ms) throws SQLException {
 		ResultSet resultado = null ;
 		String mensaje = null;
 		String fecha = chat.getFecha(ms);
@@ -47,7 +47,7 @@ public class FlujoWatson {
 			mensaje = crearMensajeConsulta(resultado,10);
 		}	
 		return mensaje;	
-	}
+	}*/
 	
 	public String crearMensajeConsulta(ResultSet rs,int atributos) throws SQLException {
 		String mensaje = "";

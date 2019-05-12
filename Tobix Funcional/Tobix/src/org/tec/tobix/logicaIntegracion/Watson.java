@@ -37,7 +37,7 @@ public class Watson {
 			this.option = new IamOptions.Builder()
 				    .apiKey("P3l7eKorVPnyC_Di_bUMlUpF-pb9tBh5ouycErv31lVP")
 				    .build();
-			System.out.println("IamOptions");
+			System.out.println(option);
 			System.out.println("IamOptions");
 			this.service = new Assistant("2017-09-21", this.option);
 			System.out.println("Assistant");
@@ -76,69 +76,23 @@ public class Watson {
 		return outputObj.getString(large-1);
 	}
 	
-	public String getTipoEvento(MessageResponse response)
-	{
-		JSONObject jsonResponse = new JSONObject(response);
-		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
-		String tipoEvento = null;
-		if(outputObj.has("tipoEvento")) 
-		{
-			tipoEvento = outputObj.get("tipoEvento").toString();
-		}
-		return tipoEvento;
-	}
-	
-
-	
-	
-	public String getAccion(MessageResponse response)
-	{
-		JSONObject jsonResponse = new JSONObject(response);
-		System.out.println(response);
-		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
-		String tipoEvento = null;
-		if(outputObj.has("accion")) 
-		{
-			tipoEvento = outputObj.get("accion").toString();
-		}
-		return tipoEvento;
-	}
 	
 	public String getFecha(MessageResponse response)
 	{
 		JSONObject jsonResponse = new JSONObject(response);
-		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
+		JSONArray outputObj = (JSONArray) jsonResponse.get("entities");
+		JSONObject o = null;
 		String date = null;
-		if(outputObj.has("date")) 
+		if(jsonResponse.has("entities")) 
 		{
-			date = outputObj.get("date").toString();
+			o = outputObj.getJSONObject(0);
+			date = o.getString("value");
+		
+			//System.out.println("entities");
 		}
 		return date;
 	}
 	
-	public String getEncargado(MessageResponse response)
-	{
-		JSONObject jsonResponse = new JSONObject(response);
-		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
-		String encargado = null;
-		if(outputObj.has("encargado")) 
-		{
-			encargado = outputObj.get("encargado").toString();
-		}
-		return encargado;
-	}
-	
-	public String getFranja(MessageResponse response)
-	{
-		JSONObject jsonResponse = new JSONObject(response);
-		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
-		String franja = null;
-		if(outputObj.has("franja")) 
-		{
-			franja = outputObj.get("franja").toString();
-		}
-		return franja;
-	}
 	public String getIdActividad(MessageResponse response)
 	{
 		JSONObject jsonResponse = new JSONObject(response);
