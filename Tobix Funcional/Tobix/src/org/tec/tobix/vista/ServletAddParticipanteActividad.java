@@ -1,6 +1,7 @@
 package org.tec.tobix.vista;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -45,15 +46,15 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String id = request.getParameter("idPersona").toString();
 		String Act = request.getParameter("id").toString();
+		String idioma = request.getParameter("idioma").toString();
 		int idAct = Integer.parseInt(Act);	
 		boolean  puedo = false;
-		
+		PrintWriter out = response.getWriter();
 		String hora;
 		try {
 			hora = data.selectHoraInicio(Act);
 			String dia = data.selectFecha(Act);
-			if (calendar.diaVrsDia(dia)) {
-				if(calendar.horaVrsHora(hora).equals("MENOR")) {
+			if (calendar.diaVrsDia(dia) !=true ) {
 					
 				
 				String confirmar = request.getParameter("confirmar").toString();
@@ -69,7 +70,15 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 						if(confirmar.equals("SI")) {
 							insertar.insertarParticipantesConfirmados(id, idAct);		
 							String email = data.getEmail(id);
-							correos.EnviarCorreo(Act , email);
+							if(idioma.equals("espaniol")) {
+								correos.EnviarCorreo(Act , email);
+							}
+							else {
+								//Cambiar metodo al metodo que lo envia en ingles
+								correos.EnviarCorreo(Act , email);
+							}
+							
+							System.out.println(" Se envio");
 							
 						}
 
@@ -79,13 +88,18 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 				}
 			}
 		}
-		else {
-				System.out.println("You are late");
+		
+			else {
+				System.out.println("La actividad que desea registrar ya paso de dia , por ende no puede comentar'");
+	  			out.println("<script type=\"text/javascript\">");
+	  		    out.println("alert('La actividad que desea comentar no se ha realizado todavia, por ende no puede comentar');");
+	  		    out.println("location='addActivity.jsp';");
+	  		    out.println("</script>");
 			}
-		  }
 		} catch (SQLException | ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			
 		}
 		
 		

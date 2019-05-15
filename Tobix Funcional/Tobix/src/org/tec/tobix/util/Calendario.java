@@ -26,13 +26,10 @@ public class Calendario {
         String[] horaTotalConsulta = Hora.split(":");
         int horaConsulta = Integer.parseInt(horaTotalConsulta[0]);
         int minutosConsulta = Integer.parseInt(horaTotalConsulta[1]);
-        int segundosConsulta = Integer.parseInt(horaTotalConsulta[2]);
         if(hora <= horaConsulta) {
-        	if(minutos <= minutosConsulta ) {
-        		if(segundos <= segundosConsulta) {
-        			return "MAYOR";
-        		}
-        	}
+        	//if(minutos <= minutosConsulta ) {
+        		return "MAYOR";
+        	//}
         }
         return "MENOR";
 	}

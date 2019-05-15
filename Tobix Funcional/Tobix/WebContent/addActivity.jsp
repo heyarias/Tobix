@@ -48,13 +48,7 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="date is required">
-					<span class="label-input100">Date</span>
-					<input class="input100" type="date" id="fecha"  name = "fecha" placeholder="Please enter date">
-					<span class="focus-input100"></span>
-				</div>
-				
-					
+			
 
 				<div class="wrap-input100 validate-input" data-validate="la hora es requerido">
 					<span class="label-input100">Start Time</span>

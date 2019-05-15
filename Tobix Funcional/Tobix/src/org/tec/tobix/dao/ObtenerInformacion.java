@@ -34,8 +34,11 @@ public class ObtenerInformacion {
 			ResultSet rs=ejecutarSelect(select);
 		}
 		public int selectIdActividad(String nombre, String tipo) throws SQLException {
-			String select="select idActividad from Actividad where nombre='"+nombre+"' and tipo=+'"+tipo+"'";
-			ResultSet rs=ejecutarSelect(select);
+			String select = "select idActividad from Actividad where nombre='"+nombre+"' and tipo='"+tipo+"'";
+			ResultSet rs = ejecutarSelect(select);
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
 			return rs.getInt(1);
 		}
 
@@ -75,11 +78,7 @@ public class ObtenerInformacion {
 			String select="select idActividad, nombre,horaFinal from Actividad where idActividad= "+idActividad;
 			ResultSet rs=ejecutarSelect(select);
 			return rs;}
-		public Date selectFechaBloque(int idBloque) throws SQLException {
-			String select="select fecha from Bloque where idBloque= "+idBloque;
-			ResultSet rs=ejecutarSelect(select);
-			Date fecha= rs.getDate(1);
-			return fecha;}
+	
 		public String selectActConsultaWatson(int idActividad) throws SQLException {
 			String select="select horaFinal from Actividad where idActividad='"+idActividad+"'";
 			ResultSet rs=ejecutarSelect(select);
@@ -103,17 +102,36 @@ public class ObtenerInformacion {
 		public String selectHoraInicio(String idActividad) throws SQLException, ParseException {
 			String select="select horaInicio from Actividad where idActividad='"+idActividad+"'";
 			ResultSet rs = ejecutarSelect(select);
-			String hora = rs.getString(1);
+			String hora = null;
+			while(rs.next()) {
+				hora = rs.getString(1);
+				return hora;
+			}
+	
 			return hora;
 		}
 		
 		public String selectFecha(String idActividad) throws SQLException, ParseException {
 			String select = "select fecha from Actividad where idActividad='"+idActividad+"'";
 			ResultSet rs = ejecutarSelect(select);
-			String hora = rs.getString(1);
+			String hora = null;
+			while(rs.next()) {
+				hora = rs.getString(1);
+				return hora;
+			}
+	
 			return hora;
 		}
-		
+		public String selectFechaBloque(String idBloque) throws SQLException, ParseException {
+			String select = "select fecha from Bloque where idBloque='"+idBloque+"'";
+			ResultSet rs = ejecutarSelect(select);
+			String hora = null;
+			while(rs.next()) {
+				 hora = rs.getString(1);
+				 return hora;
+			}
+			return hora;
+		}
 		public ResultSet selectWatsonActividadesFranja(String franja) throws SQLException {
 			String select="select  Bloque.idBloque,franjaHorario, Actividad.fecha,tipo,horaInicio, horaFinal,Persona.nombre, Persona.Apellido1, Persona.Apellido2,Persona.EntidadProcedencia   \r\n" + 
 					"from Actividad join ActividadXEncargados on Actividad.idActividad=ActividadXEncargados.idActividad \r\n" + 

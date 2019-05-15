@@ -41,15 +41,17 @@ public class ServletRActividad extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		int idBloque = Integer.parseInt( request.getParameter("idBloque"));
+		String id = request.getParameter("idBloque");
 		String tipo = request.getParameter("tipo").toString();
 		String nombre = request.getParameter("nombre").toString();
-		String fecha = request.getParameter("fecha").toString();
+		String fecha = null;
 		String horaInicio = request.getParameter("horaInicio").toString();
 		String horaFinal = request.getParameter("horaFinal").toString();
 		String descripcion = request.getParameter("description").toString();
 		PrintWriter out = response.getWriter();
 		SimpleDateFormat fechareal = new SimpleDateFormat("dd-MM-yyyy");
 		try {
+			fecha = info.selectFechaBloque(id); 
 			java.util.Date dateE = fechareal.parse(fecha);
 			java.sql.Date sqlDate = new java.sql.Date(dateE.getTime());
 			System.out.println(sqlDate);
@@ -62,6 +64,10 @@ public class ServletRActividad extends HttpServlet {
 		}
 		catch(Exception e) {
   			System.out.println(e);
+  			out.println("<script type=\"text/javascript\">");
+  		    out.println("alert('Bloque no encontrado');");
+  		    out.println("location='addActivity.jsp';");
+  		    out.println("</script>");
 		}
 	}
 

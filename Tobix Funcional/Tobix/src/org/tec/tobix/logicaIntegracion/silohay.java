@@ -23,7 +23,7 @@ public class silohay {
 	 try {
 	//	System.out.print(w.askWatsonMe("hoy"));
 		 MessageResponse response;
-		 response = w.askWatsonMe("id actividad");
+		 response = w.askWatsonMe("5");
 		 String h =  w.getFecha(response);
 		 System.out.print(h);
 		//System.out.print(w.askWatson("comentar"));

@@ -35,7 +35,15 @@
 					<span class="label-input100">Confirmar Participacion</span>
 					<select name="confirmar" id="confirmar">
   						<option value="SI">Si, confirmo</option>
-  						<option value="NO">No, despues confirmo]</option>
+  						<option value="NO">No, despues confirmo</option>
+					</select>
+				</div>
+				
+				<div class="wrap-input100 validate-input" id= "idioma" name = "idioma" data-validate="Field is required">
+					<span class="label-input100">Idioma para el mensaje de confirmacion</span>
+					<select name="confirmar" id="confirmar">
+  						<option value="ingles">Ingles</option>
+  						<option value="espaniol">Espaniol</option>
 					</select>
 				</div>
 			<div align= "center"><br><input type="submit" class="button" value="Registrar Participacion" style="width: 154px; "><br></div>
