@@ -25,7 +25,7 @@ public class InsertarInformacion {
 		String query="insert into Tematica(nombre,descripcion) values('"+nombre+"','"+descripcion+"')";	
 		EjecutarQuery(query);
 	}
-	public void insertarComentario(int idActividad , String comentario) throws SQLException  {
+	public void insertarComentario(String idActividad , String comentario) throws SQLException  {
 		String query = "insert into Comentario(idActividad,comentario) values("+idActividad+",'"+comentario+"')";	
 		EjecutarQuery(query);
 	}

@@ -45,14 +45,20 @@ public class ServletVerActividadesParticidas extends HttpServlet {
 	    try {
 			data.selectActividadesPorParticipante(id);
 			mensaje = crearMensaje(resultado,2);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			PrintWriter out = response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+		    out.println("mensaje');");
+		    out.println("location='addActivity.jsp';");
+		    out.println("</script>");
 		}
 		
 	
 	PrintWriter out = response.getWriter();
-	out.print("<!DOCTYPE html>\r\n" + 
+	/*out.print("<!DOCTYPE html>\r\n" + 
 			"<html>\r\n" + 
 			"	<head>\r\n" + 
 			"		<title>Chat</title>\r\n" + 
@@ -110,7 +116,11 @@ public class ServletVerActividadesParticidas extends HttpServlet {
 			"		</div>\r\n" + 
 			"	</body>\r\n" + 
 			"</html>\r\n" + 
-			"");
+			"");*/
+	    out.println("<script type=\"text/javascript\">");
+	    out.println("mensaje');");
+	    out.println("location='addActivity.jsp';");
+	    out.println("</script>");
 }
 
 

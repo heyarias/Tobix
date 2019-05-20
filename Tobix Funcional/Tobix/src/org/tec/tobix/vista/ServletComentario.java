@@ -52,10 +52,13 @@ public class ServletComentario extends HttpServlet {
 				hora = data.selectHoraInicio(id);
 				String dia = data.selectFecha(id);
 				if (calendar.diaVrsDia(dia) != true) {
-					if(calendar.horaVrsHora(hora).equals("MAYOR")) {
+					/*if(calendar.horaVrsHora(hora).equals("MAYOR")) {
 						Comentario comentario = new Comentario(mensaje);
 						System.out.println(comentario.toString());
-					}
+					}*/
+					Comentario comentario = new Comentario(mensaje);
+					System.out.println(comentario.toString());
+					
 				}
 	}
 		catch(Exception e) {			

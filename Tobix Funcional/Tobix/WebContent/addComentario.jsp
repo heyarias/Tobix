@@ -20,7 +20,7 @@
 
 <body>
 <form action= "ServletVerActividadesParticidas" method="get">
-<div align= "center"><br><input type="button" onclick = "alert(verga)" class="button" value="Ver Actividades con mi participacion" style="width: 154px; "><br></div>
+<div align= "center"><br><input type="submit" onclick = "alert(verga)" class="button" value="Ver Actividades con mi participacion" style="width: 154px; "><br></div>
 
 </form>
 <form action= "ServletComentario" method="get">

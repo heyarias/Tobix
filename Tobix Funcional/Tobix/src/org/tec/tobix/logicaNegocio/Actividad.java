@@ -153,7 +153,7 @@ public void calcularInicio(int idActividad) {
  * @param descripcion
  * @throws SQLException
  */
-public void agregarComentario(int idActividad,String descripcion) throws SQLException {
+public void agregarComentario(String idActividad,String descripcion) throws SQLException {
 	Comentario comentario= new Comentario(descripcion);
 	comentarios.add(comentario);
 	insertar.insertarComentario(idActividad, descripcion);

@@ -77,7 +77,7 @@ public class Watson {
 	}
 	
 	
-	public String getFecha(MessageResponse response)
+	public String getResultado(MessageResponse response)
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONArray outputObj = (JSONArray) jsonResponse.get("entities");
@@ -92,7 +92,20 @@ public class Watson {
 		}
 		return date;
 	}
-	
+	public String getVariable(MessageResponse response)
+	{
+		JSONObject jsonResponse = new JSONObject(response);
+		JSONArray outputObj = (JSONArray) jsonResponse.get("entities");
+		JSONObject o = null;
+		String date = null;
+		if(jsonResponse.has("entities")) 
+		{
+			o = outputObj.getJSONObject(0);
+			date = o.getString("entity");
+		}
+		//System.out.println(response);
+		return date;
+	}
 	public String getIdActividad(MessageResponse response)
 	{
 		JSONObject jsonResponse = new JSONObject(response);

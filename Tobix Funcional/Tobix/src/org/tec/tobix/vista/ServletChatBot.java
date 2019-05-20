@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tec.tobix.dao.InsertarInformacion;
+import org.tec.tobix.dao.ObtenerInformacion;
 import org.tec.tobix.logicaIntegracion.FlujoWatson;
 import org.tec.tobix.logicaIntegracion.Watson;
+import org.tec.tobix.logicaNegocio.Comentario;
+import org.tec.tobix.util.Calendario;
 
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
@@ -24,6 +29,18 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 @WebServlet("/ServletChatBot")
 public class ServletChatBot extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private FlujoWatson flujo = new FlujoWatson();
+	private Calendario calendar = new Calendario();
+	ObtenerInformacion data = new ObtenerInformacion();
+	InsertarInformacion info = new InsertarInformacion();
+       
+	private String mensaje; 
+	private String cedula;
+	private String idActividad ;
+	private String tipofiltro ;
+	private String comentario ;
+	private String filtro ;
+	private String accion;
 	
 
        
@@ -48,25 +65,27 @@ public class ServletChatBot extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			
+		String variable = null;
+		String value = null;
 		String mensaje = "Hubo un error";	
+		MessageResponse response1;
 		String ask = request.getParameter("mensajeEnviar").toString();
-		FlujoWatson watson = new FlujoWatson();
-		String servletE = "" ;
-		
-		Watson w= Watson.getSingletonInstance();
+		Watson w = Watson.getSingletonInstance();
 		MessageResponse msg = (MessageResponse) w.startWatson();
-		System.out.println(w.getOutput(msg));
 
-		String salir = "salir";
-		mensaje = w.askWatson(ask).toString();
+		response1 = w.askWatsonMe(ask);
+		mensaje = w.getWatsonMessage();
+		variable = w.getVariable(response1);
+		value = w.getResultado(response1);
+		
+		System.out.println("Value: "+ value);
 		//servletE = w.askWatson(ask);
 		/*do{
 			
 		     System.out.println(w.askWatson(ask));
 		}while (ask != salir) ;*/
 		
-		if(ask.equals("registrar")) {
+		/*if(ask.equals("registrar")) {
 			//do something
 			RequestDispatcher dispatcher = request.getRequestDispatcher("addParticipanteActividad.jsp");
 			dispatcher.forward(request, response);
@@ -80,6 +99,52 @@ public class ServletChatBot extends HttpServlet {
 				dispatcher.forward(request, response);	
 			}
 		else {
+			
+		}*/
+		if(variable.equals("accion")) {
+			accion = value;
+		}
+		
+		if(accion.equals("Registrar")) {
+			if(cedula == null) {
+				cedula = value;
+			}
+			else {
+				idActividad= value;
+				
+			}
+			//reset values
+		}
+		else if(accion.equals("comentar")) {
+			if(idActividad == null){
+				idActividad = value;
+			}
+			else {
+				//flujo.setComentario(value);
+				String hora;
+				try {
+					hora = data.selectHoraInicio(idActividad);
+					String dia = data.selectFecha(idActividad);
+					if (calendar.diaVrsDia(dia) != true) {
+						/*if(calendar.horaVrsHora(hora).equals("MAYOR")) {
+							Comentario comentario = new Comentario(mensaje);
+							System.out.println(comentario.toString());
+						}*/
+						
+						
+					}
+					System.out.print("Se supone que va a insertar");
+					info.insertarComentario(idActividad,ask);
+				} catch (SQLException | ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+			
+		}
+		else if(accion.equals("Consultar")) {
 			
 		}
 		
@@ -116,18 +181,16 @@ public class ServletChatBot extends HttpServlet {
 													
 				"									<div class=\"msg_cotainer\">\r\n" + 
 													mensaje + 
-				"									<span class=\"msg_time\"> Today</span>\r\n" + 
 				"								</div>\r\n" + 
 				"\r\n" + 
 				"							</div>\r\n" + 
+				"						</div>\r\n" + 
 				"							<div class=\"d-flex justify-content-end mb-4\">\r\n" + 
 				"								<div class=\"msg_cotainer_send\">\r\n" + 
 													ask + 
-				"									<span class=\"msg_time_send\">Today</span>\r\n" + 
 				"								</div>\r\n" + 
 				"								</div>\r\n" + 
 				"							</div>\r\n" + 
-				"						</div>\r\n" + 
 				"						</div>\r\n" + 
 				"						\r\n" + 
 				"						<div class=\"card-body msg_card_body\">\r\n" + 

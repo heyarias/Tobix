@@ -12,13 +12,11 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class FlujoWatson {
 
-	private MessageResponse msg = null;
-	private String mensaje; 
+	private MessageResponse msg;
+
 	Watson chat = Watson.getSingletonInstance();
 	ObtenerInformacion info = new ObtenerInformacion();
-
 	
-
 	public String obtenerMensajeWatson() throws IOException {
 		MessageResponse msg = (MessageResponse) chat.startWatson();
 		return chat.getOutput(msg);

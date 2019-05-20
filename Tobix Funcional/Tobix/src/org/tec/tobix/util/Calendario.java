@@ -55,6 +55,24 @@ public class Calendario {
         return false;
 	}
 
-	
+ public String getFechaActual() {
+	 Calendar fecha = Calendar.getInstance();
+	 int anoActual = fecha.get(Calendar.YEAR);
+     int mesActual = fecha.get(Calendar.MONTH) + 1;
+     int diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+     String fechaActual = diaActual + "-"+  mesActual + "-" +anoActual;
+	 System.out.println(fechaActual);
+	 return fechaActual;
+ }
+ 
+ public String getHoraActual() {
+	 Calendar  calendario = Calendar.getInstance();
+	 int hora = calendario.get(Calendar.HOUR_OF_DAY);
+     int minutos = calendario.get(Calendar.MINUTE);
+     int segundos = calendario.get(Calendar.SECOND);
+     String horaActual = hora + ":" + minutos + ":" + segundos;
+     System.out.println(horaActual); 
+	 return horaActual;
+ }
 
 }
