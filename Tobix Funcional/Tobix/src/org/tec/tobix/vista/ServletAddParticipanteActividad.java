@@ -46,7 +46,7 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String id = request.getParameter("idPersona").toString();
 		String Act = request.getParameter("id").toString();
-		String idioma = request.getParameter("idioma").toString();
+
 		int idAct = Integer.parseInt(Act);	
 		boolean  puedo = false;
 		PrintWriter out = response.getWriter();
@@ -70,14 +70,7 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 						if(confirmar.equals("SI")) {
 							insertar.insertarParticipantesConfirmados(id, idAct);		
 							String email = data.getEmail(id);
-							if(idioma.equals("espaniol")) {
-								correos.EnviarCorreo(Act , email);
-							}
-							else {
-								//Cambiar metodo al metodo que lo envia en ingles
-								correos.EnviarCorreo(Act , email);
-							}
-							
+								correos.EnviarCorreo(Act , email);						
 							System.out.println(" Se envio");
 							
 						}

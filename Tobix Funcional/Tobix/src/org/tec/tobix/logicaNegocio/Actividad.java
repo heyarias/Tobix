@@ -288,7 +288,7 @@ public void agregarComentario(String idActividad,String descripcion) throws SQLE
 			}
 		}return contE;}
 	
-	public ArrayList<Integer> analisisComentariosFelices() throws SQLException {
+	public ArrayList<ArrayList> analisisComentariosFelices() throws SQLException {
 		ArrayList<Integer> ActividadID= obtenerInfoActividad();
 		ArrayList<Integer> comentariosFelices= new ArrayList();
 		ArrayList<Integer> actividades= new ArrayList();
@@ -304,11 +304,13 @@ public void agregarComentario(String idActividad,String descripcion) throws SQLE
 			comentariosFelices.add(cant);
 			actividades.add(ActividadID.get(r));	
 		}
-		ArrayList<Integer> array = ordenamiento(comentariosFelices,actividades);
+		ArrayList<ArrayList> array = ordenamiento(comentariosFelices,actividades);
+		System.out.println("qwertyukjbvcxzxcvbnmjhgtfdwertyuijhbhygfrdede");
+		System.out.println(array.toString());
 		return array;
 	}
 	
-public ArrayList<Integer> analisisComentariosEnojados() throws SQLException {
+public ArrayList<ArrayList> analisisComentariosEnojados() throws SQLException {
 		
 	ArrayList<Integer> ActividadID= obtenerInfoActividad();
 	ArrayList<Integer> comentariosEnojados= new ArrayList();
@@ -325,55 +327,52 @@ public ArrayList<Integer> analisisComentariosEnojados() throws SQLException {
 		comentariosEnojados.add(cant);
 		actividades.add(ActividadID.get(r));	
 	}
-	ArrayList<Integer> array = ordenamiento(comentariosEnojados,actividades);
+	ArrayList<ArrayList> array = ordenamiento(comentariosEnojados,actividades);
 	return array;
 }
 		
 
 
 
-	public ArrayList<Integer> ordenamiento(ArrayList<Integer> sentimientos2, ArrayList<Integer> sentimientos1) {
-		
-		int i=0;
-	    int max = i;
-	    int maxN=i;
-	    int contadorT=sentimientos2.size();
-	    while (contadorT!=0) {
-	    	i=0;
-	    for (int j = i + 1 ; j< sentimientos2.size() ; j++) {
-	        if (sentimientos2.get(j)> sentimientos2.get(max)) {
-	            int ant = i;  
-	            int valor=sentimientos2.get(i);
-	            int valorN=sentimientos1.get(i);
-	            int antN= i;
-	            sentimientos2.set(i, sentimientos2.get(j));
-	            sentimientos1.set(i, sentimientos1.get(j));
-	            sentimientos2.set(j, valor);
-	            sentimientos1.set(j, valorN);
-	            i=ant ;
-	            max=j;
-	            j=ant+1;
-	            j=j-1;
-	           }
-	        else {
-	        	i++;}
-	      }
-	    contadorT=contadorT-1;
-	    }
-	    int contador3=0;
-	    while(contador3< sentimientos1.size()) {
-	    	System.out.println(sentimientos1.get(contador3));
-	    	System.out.println(sentimientos2.get(contador3));
-	    	contador3++;
-	    }
-	    ArrayList array= new ArrayList<>();
-	    array.add(sentimientos1);
-	    array.add(sentimientos2);
-	    
-	    return array;
-	    }
-	
-	
-
-	
+public ArrayList<ArrayList> ordenamiento(ArrayList<Integer> sentimientos2, ArrayList<Integer> sentimientos1) {
+	ArrayList <ArrayList> array= new ArrayList();
+	ArrayList comentarios= new ArrayList();
+	int i=0;
+    int max = i;
+    int maxN=i;
+    int contadorT=sentimientos2.size();
+    while (contadorT!=0) {
+    	i=0;
+    for (int j = i + 1 ; j< sentimientos2.size() ; j++) {
+        if (sentimientos2.get(j)> sentimientos2.get(max)) {
+            int ant = i;  
+            int valor=sentimientos2.get(i);
+            int valorN=sentimientos1.get(i);
+            int antN= i;
+            sentimientos2.set(i, sentimientos2.get(j));
+            sentimientos1.set(i, sentimientos1.get(j));
+            sentimientos2.set(j, valor);
+            sentimientos1.set(j, valorN);
+            i=ant ;
+            max=j;
+            j=ant+1;
+            j=j-1;
+           }
+        else {
+        	i++;}
+      }
+    contadorT=contadorT-1;
+    }
+    int contador3=0;
+    while(contador3< sentimientos1.size()) {
+    	System.out.println(sentimientos1.get(contador3));
+    	System.out.println(sentimientos2.get(contador3));
+    	contador3++;
+    }
+    
+    array.add(sentimientos1);
+    array.add(sentimientos2);
+    
+    return array;
+    }
 }

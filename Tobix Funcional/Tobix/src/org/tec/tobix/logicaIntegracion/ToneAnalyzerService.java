@@ -8,26 +8,51 @@ import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneOptions;
 
 public class ToneAnalyzerService {
-	public static ArrayList<String> determinarSentimiento(String comentario) {
-		System.out.println("Entro");
+	private static ToneAnalyzer ToneAnalyzer() {
 		IamOptions options = new IamOptions.Builder()
 				  .apiKey("8ujvx-B3Qu_VtCEftiI7-kWkhGasbHBqN940hW4qXocY")
 				  .build();
 
 				ToneAnalyzer toneAnalyzer = new ToneAnalyzer("2017-09-21", options);
 				toneAnalyzer.setEndPoint("https://gateway.watsonplatform.net/tone-analyzer/api");
+				return toneAnalyzer;
 
+	}
+	public static ArrayList<String> determinarSentimiento(String comentario) {
+			ToneAnalyzer toneAnalyzer= ToneAnalyzer();
 				String text = comentario;
-
 				ToneOptions toneOptions = new ToneOptions.Builder()
 				.sentences(true)
 				  .text(text)
 				  .build();
-
 				ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute();
-				System.out.println(toneAnalysis);
+				System.out.println("Sentences tone");
+				System.out.println(toneAnalysis.getSentencesTone().get(0));
 				System.out.println("salio");
 		return extraerSentimientoPrincipal(toneAnalysis);
+	}
+	public void detectarFrases(String comentario) {
+		ArrayList<String> frase= new ArrayList();
+		ArrayList<String> sentimiento= new ArrayList();
+		ArrayList<ArrayList> res= new ArrayList();
+		
+		ToneAnalyzer toneAnalyzer= ToneAnalyzer();
+				String text = comentario;
+				ToneOptions toneOptions = new ToneOptions.Builder()
+				.sentences(true)
+				  .text(text)
+				  .build();
+				ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute();
+				 for(int i=0; i<=toneAnalysis.getSentencesTone().size()-1;i++) {
+					 frase.add(toneAnalysis.getSentencesTone().get(i).getText());
+					 sentimiento.add(toneAnalysis.getSentencesTone().get(i).getTones().get(0).getToneName());
+				 }
+				res.add(frase);
+				res.add(sentimiento);
+				System.out.println(res.get(1));
+				System.out.println(res.get(0));
+				
+		
 	}
 	private static ArrayList<String> extraerSentimientoPrincipal(ToneAnalysis tone) {
 		System.out.println("Entro1");
@@ -35,10 +60,10 @@ public class ToneAnalyzerService {
 		ArrayList<String> sentimientos = new ArrayList();
 		toneString = toneString.replaceAll(" ", "");
 		toneString = toneString.replaceAll(" ", "");
-		//System.out.println(toneString);
+		System.out.println(toneString);
 		String[] toneDivi = toneString.split(",");
 		for(int i=1; i<toneDivi.length; i=i+3) {
-			toneString = toneDivi[i].split(":")[1];
+			toneString = toneDivi[i].split(":")[0];
 			
 			sentimientos.add(toneString);
 			

@@ -2,6 +2,7 @@ package org.tec.tobix.logicaIntegracion;
 
 
 
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -17,11 +18,14 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.tec.tobix.util.translate;
+
 public class EnvioCorreos {
 
 	final String username = "tobixDS2019@gmail.com";
 	final String password = "bztlcifrptbedqpp";	
-public void EnviarCorreo(String idActividad, String email) {
+	
+public void EnviarCorreo(String idActividad, String email) throws IOException {
 	Properties props = new Properties();
 	props.put("mail.smtp.auth", "true");
 	props.put("mail.smtp.starttls.enable","true");
@@ -46,8 +50,10 @@ public void EnviarCorreo(String idActividad, String email) {
 		message.setRecipients(Message.RecipientType.TO,
 			InternetAddress.parse(email));
 		message.setSubject("Tobix");
-		message.setText(mensaje);
-
+		String mensajeIngles  = translate.translate(mensaje);
+		message.setText(mensaje +" ************************************************************"
+				+ "\n" + mensajeIngles);
+		System.out.println(mensaje);
 		Transport.send(message);
 	} catch (MessagingException e) {
 		throw new RuntimeException(e);

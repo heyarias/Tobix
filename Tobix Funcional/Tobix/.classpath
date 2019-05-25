@@ -11,11 +11,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="target/generated-sources/annotations">
 		<attributes>
 			<attribute name="ignore_optional_problems" value="true"/>
@@ -33,25 +28,35 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/activation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/assistant-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/assistant-6.5.1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/aws-java-sdk.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/conversation-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/core-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/db2jcc4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/discovery-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/speech-to-text-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/tone-analyzer-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javaee.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/java-sdk-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javax.mail-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javax.servlet.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javax.servlet-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/language-translator-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/natural-language-classifier-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/natural-language-understanding-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/personality-insights-6.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/poi-3.9.jar/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/assistant-6.5.1-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/assistant-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang3-3.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/conversation-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cookie-manager-0.1.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/core-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/db2jcc4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/discovery-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.2.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/java-sdk-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.mail-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jersey-jsr166e-2.25.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-20180130.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/language-translator-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/logging-interceptor-3.11.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/natural-language-classifier-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/natural-language-understanding-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/okhttp-3.11.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/okhttp-urlconnection-3.11.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/okio-1.14.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/personality-insights-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/speech-to-text-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tone-analyzer-6.5.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/unirest-java-1.4.9.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

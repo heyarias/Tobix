@@ -58,7 +58,7 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 			try {
 				rs = data.listarActividadesPorParticipantesConfirmados();
 				while(rs.next()) {
-						mensaje += "Actividad:" +rs.getString(1) + " ," + rs.getInt(2) + " ," +  "Cantidad"+rs.getInt(3) ;
+					mensaje += "Actividad: " + rs.getString(1) + " , Nombre: " + rs.getInt(2) + " ," + "Cantidad "+ rs.getInt(3) + "\n";
 
 				}
 			} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 			try {
 				rs = data.listarActividadesPorParticipantes();
 				while(rs.next()) {
-					mensaje += "Actividad:"+ rs.getString(1) + " ," + rs.getInt(2) + " ," + "Cantidad"+ rs.getInt(3) ;
+					mensaje += "Actividad: " + rs.getString(1) + " , Nombre: " + rs.getInt(2) + " ," + "Cantidad "+ rs.getInt(3) + "\n";
 
 			}
 			} catch (SQLException e) {
@@ -80,7 +80,7 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 			try {
 				rs = data.listarActividadesPorComentarios();
 				while(rs.next()) {
-					mensaje += rs.getString(1) + " ," + rs.getInt(2) + " ," + rs.getInt(3) ;
+					mensaje += "Actividad: " + rs.getString(1) + " , Nombre: " + rs.getInt(2) + " ," + "Cantidad "+ rs.getInt(3) + "\n";
 
 			}
 				
@@ -88,9 +88,40 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}/*se if(query.equals("Act x Felicidad")) {
-			rs = act.
-		}*/else if(query.equals("Sentimientos")) {
+		}else if(query.equals("Act x Felicidad")) {
+			try {
+			ArrayList<ArrayList> f = act.analisisComentariosFelices();
+			int i = 0;
+			while(i<f.size()) {
+				ArrayList actividades = f.get(0);
+				ArrayList comentarios = f.get(1);
+				mensaje += "Id Actividad: "+ comentarios.get(i) + "Cantidad de Comentarios: "+ actividades.get(i) + "\n"; 
+				i++;
+			}		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		}
+		else if(query.equals("Act x Enojo")) {
+			try {
+				ArrayList<ArrayList> f = act.analisisComentariosEnojados();
+				int i = 0;
+				while(i<f.size()) {
+					ArrayList actividades = f.get(0);
+					ArrayList comentarios = f.get(1);
+					mensaje += "Id Actividad: "+ comentarios.get(i) + "Cantidad de Comentarios: "+ actividades.get(i) + "\n"; 
+					i++;
+				}		
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+			else if(query.equals("Sentimientos")) {
 			try {
 				ArrayList<ArrayList> f = act.analisisComentario(id);
 				int i = 0;
@@ -98,7 +129,7 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 					ArrayList comentario = f.get(i);
 					System.out.println( comentario.get(0));
 					System.out.println( comentario.get(1));
-					mensaje += "Comentario: "+ comentario.get(0) + "Sentimientos: "+ comentario.get(1); 
+					mensaje += "Comentario: "+ comentario.get(0) + "Sentimientos: "+ comentario.get(1) + "\n"; 
 					i++;
 					
 				}
@@ -173,11 +204,12 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 		String mensaje = "";
 		while(rs.next()) {
 			int i = 1;
-			System.out.println("idk");
+			//System.out.println("idk");
 			while(i-1<atributos) {
 				mensaje += rs.getString(i) + " ,";
+				mensaje += "\n";
 			}
-			mensaje += "\n";
+			
 		}
 		System.out.println(mensaje);
 		return mensaje;
