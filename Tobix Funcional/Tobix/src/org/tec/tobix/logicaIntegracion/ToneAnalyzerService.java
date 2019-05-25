@@ -8,7 +8,8 @@ import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneOptions;
 
 public class ToneAnalyzerService {
-	public static String determinarSentimiento(String comentario) {
+	public static ArrayList<String> determinarSentimiento(String comentario) {
+		System.out.println("Entro");
 		IamOptions options = new IamOptions.Builder()
 				  .apiKey("8ujvx-B3Qu_VtCEftiI7-kWkhGasbHBqN940hW4qXocY")
 				  .build();
@@ -19,29 +20,56 @@ public class ToneAnalyzerService {
 				String text = comentario;
 
 				ToneOptions toneOptions = new ToneOptions.Builder()
+				.sentences(true)
 				  .text(text)
 				  .build();
 
 				ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute();
+				System.out.println(toneAnalysis);
+				System.out.println("salio");
 		return extraerSentimientoPrincipal(toneAnalysis);
 	}
-	private static String extraerSentimientoPrincipal(ToneAnalysis tone) {
+	private static ArrayList<String> extraerSentimientoPrincipal(ToneAnalysis tone) {
+		System.out.println("Entro1");
 		String toneString = tone.toString();
 		ArrayList<String> sentimientos = new ArrayList();
 		toneString = toneString.replaceAll(" ", "");
+		toneString = toneString.replaceAll(" ", "");
+		//System.out.println(toneString);
 		String[] toneDivi = toneString.split(",");
 		for(int i=1; i<toneDivi.length; i=i+3) {
 			toneString = toneDivi[i].split(":")[1];
+			
 			sentimientos.add(toneString);
+			
+			//ArrayConSentimientos
 		}
 		
-		return definirSentimiento(sentimientos);
+		return sentimientos;
 	}
+	public ArrayList<String> determinarSentimientos(String comentario) {
+		ArrayList<String> sentimientos= determinarSentimiento(comentario);
+		System.out.println(sentimientos);
+		definirSentimiento(sentimientos);
+		return sentimientos;//ArrayConSentimientos
+	
+	}
+	public String cantSentimientos(String comentario) {
+		ArrayList<String> sentimientos= determinarSentimiento(comentario);
+		int[] cantidadSentimientos= new int[8];
+		String sentimiento =definirSentimientoPrincipal( sentimientos);
+		return sentimiento;}
+	
+	
+	
 	private static String definirSentimiento(ArrayList<String> sentimientos) {
-		
+		int contF=0;
+		int contE=0;
 		for(int i=0;i<sentimientos.size();i++) {
 			if(sentimientos.get(i).equals("anger")) {
 				System.out.println("anger");
+				
+				
 				return "enojo";
 			}
 			if(sentimientos.get(i).equals("fear")) {
@@ -69,44 +97,56 @@ public class ToneAnalyzerService {
 				System.out.println("tentative");
 				return "tentative";
 			}
+			else {
+				System.out.println(sentimientos.get(i)); //Extrae las frases
+			}
 		}
 		return "tentative";
 	}
 	
-	private static int[] calcularParticipacionSentimiento(ArrayList<String> sentimientos, int[] cantidadSentimientos) {
+	
+	private static int[] calcularParticipacionSentimiento(ArrayList<String> sentimientos, int[] cantidadSentimientos)
+	{
+		
 		for(int i=0; i<sentimientos.size(); i++) {
-			if(sentimientos.get(i).equals("anger")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("anger")) {
 				cantidadSentimientos[0] +=1;
 			}
-			if(sentimientos.get(i).equals("fear")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("fear")) {
 				cantidadSentimientos[1] +=1;
 			}
-			if(sentimientos.get(i).equals("joy")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("joy")) {
+				System.out.println("felicidad");
 				cantidadSentimientos[2] +=1;
 			}
-			if(sentimientos.get(i).equals("sadness")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("sadness")) {
 				cantidadSentimientos[3] +=1;
 			}
-			if(sentimientos.get(i).equals("analytical")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("analytical")) {
 				cantidadSentimientos[4] +=1;
 			}
-			if(sentimientos.get(i).equals("confident")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("confident")) {
 				cantidadSentimientos[5] +=1;
 			}
-			if(sentimientos.get(i).equals("tentative")) {
+			if(sentimientos.get(i).substring(1, sentimientos.get(i).length()-1).equals("tentative")) {
 				cantidadSentimientos[6] +=1;
 			}
+			else {
+
+			}
+			
 		}
 		return cantidadSentimientos;
 	}
 	public static String definirSentimientoPrincipal(ArrayList<String> sentimientos) {
-		int[] cantidadSentimientos= calcularParticipacionSentimiento(sentimientos,new int[7]);
+		int[] cantidadSentimientos= calcularParticipacionSentimiento(sentimientos,new int[8]);
 		String[] nombreSentimiento = {"anger","fear","joy","sadness","analytical","confident","tentative"};
-		
 		String sentimientoPrincipal = "anger"; 
-		for(int i=1; i<8; i++) {
-			if(cantidadSentimientos[i]>cantidadSentimientos[i-1]) {
-				sentimientoPrincipal = nombreSentimiento[i];
+		int mayor=0;
+		for(int i=1; i<7; i++) {
+			if(cantidadSentimientos[i]>mayor) {
+				mayor=i;
+				sentimientoPrincipal = nombreSentimiento[mayor];
 			}
 		}
 		return sentimientoPrincipal;

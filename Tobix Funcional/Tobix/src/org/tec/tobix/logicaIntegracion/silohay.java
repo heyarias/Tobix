@@ -10,6 +10,8 @@ import java.util.Scanner;
 import org.json.JSONObject;
 import org.tec.tobix.dao.ObtenerInformacion;
 import org.tec.tobix.util.Calendario;
+import org.tec.tobix.logicaIntegracion.ToneAnalyzerService;
+import org.tec.tobix.logicaNegocio.Actividad;
 
 import com.ibm.db2.jcc.am.ResultSet;
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
@@ -17,6 +19,7 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 public class silohay {
 	//static Calendario time = new Calendario();
 	//static ObtenerInformacion data = new ObtenerInformacion();
+<<<<<<< HEAD
 	static Watson w = Watson.getSingletonInstance();
 	
 
@@ -51,6 +54,14 @@ public class silohay {
 		 System.out.println(SQLException);
 	 }
 		
+=======
+
+
+
+	public static void main(String[] args) throws SQLException{
+		LanguageTranslatorApp LT= new LanguageTranslatorApp();
+		LT.correr();
+>>>>>>> master
 	}
 		
 		

@@ -91,17 +91,10 @@ public ResultSet listarSegunParticipantesConfirmados() throws SQLException {
 }
 public ArrayList analisisComentario(int actividad) throws SQLException {
 	ResultSet rs=obtener.selectComentarios(actividad);
-	ArrayList<String> sentimientos = new ArrayList<>();
-	ArrayList<ArrayList> comentarios = new ArrayList<>();
+	ArrayList<String> comentarios = new ArrayList<>();
 	int contador=1; 
 		while (rs.next()) {
-			String comentario=rs.getString(1);
-			ToneAnalyzerService TA= new ToneAnalyzerService();
-			String sentimiento = TA.determinarSentimiento(comentario);
-			sentimientos.add(comentario);
-			sentimientos.add(sentimiento);
-			comentarios.add(sentimientos);
-	        sentimientos = new ArrayList<>();
+			comentarios.add(rs.getString(1));
 		}
 		return comentarios;
 		}
@@ -278,65 +271,76 @@ public void agregarComentario(String idActividad,String descripcion) throws SQLE
 		return ActividadID;
 	}
 	
-	public int determinarComentariosFelices(ResultSet rs) throws SQLException {
-		ArrayList<Integer> ActividadID = new ArrayList<>();
-		int contFelices=0;
-		while (rs.next()) {
-			ToneAnalyzerService TA= new ToneAnalyzerService();
-			String sentimiento=TA.determinarSentimiento(rs.getString(1));
-			if (sentimiento=="joy") {
-				contFelices++;
+	public int determinarComentariosFelices( ArrayList sentimientos) throws SQLException {
+		int contF=0;
+		for(int i=0; i<sentimientos.size();i++) {
+			if(sentimientos.get(i).equals("joy")) {
+				contF++;
 			}
-			
-		return contFelices;
-		}
-		return contFelices;
-		}
-	public int DeterminarComentariosEnojados(ResultSet rs) throws SQLException {
-		ArrayList<Integer> ActividadID = new ArrayList<>();
-		int contEnojados=0;
-		while (rs.next()) {
-			ToneAnalyzerService TA= new ToneAnalyzerService();
-			String sentimiento=TA.determinarSentimiento(rs.getString(1));
-			if (sentimiento=="anger") {
-				contEnojados++;
+		}return contF;
+	}
+	public int determinarComentariosEnojados(ArrayList sentimientos) throws SQLException {
+		int contE=0;
+		
+		for(int i=0; i<sentimientos.size();i++) {
+			if(sentimientos.get(i).equals("anger")) {
+				contE++;
 			}
-			
-		return contEnojados;}
-		return contEnojados;}
+		}return contE;}
 	
-	public void analisisComentariosFelices(int actividad) throws SQLException {
-		
+	public ArrayList<Integer> analisisComentariosFelices() throws SQLException {
 		ArrayList<Integer> ActividadID= obtenerInfoActividad();
-		int contador=0;
-		ArrayList<Integer> cantidad= new ArrayList<>();
-		while(contador< ActividadID.size()) {
-		ResultSet rs2= obtener.selectComentarios(ActividadID.get(contador));
-		int cont = determinarComentariosFelices(rs2);
-		cantidad.add(cont);
-		ordenamiento(cantidad,ActividadID);}}
-	public void analisisComentariosEnojados(int actividad) throws SQLException {
-		
-		ArrayList<Integer> ActividadID= obtenerInfoActividad();
-		int contador=0;
-		ArrayList<Integer> cantidad= new ArrayList<>();
-		while(contador< ActividadID.size()) {
-			ResultSet rs2= obtener.selectComentarios(ActividadID.get(contador));
-			int cont=DeterminarComentariosEnojados(rs2);
-			cantidad.add(cont);
-			ordenamiento(cantidad,ActividadID);
+		ArrayList<Integer> comentariosFelices= new ArrayList();
+		ArrayList<Integer> actividades= new ArrayList();
+		ToneAnalyzerService TA= new ToneAnalyzerService();
+		for(int r=0; r<ActividadID.size()-1 ;r++) {
+			ArrayList rs2=analisisComentario(ActividadID.get(r));
+			ArrayList <String> sentimientos = new ArrayList();
+			for(int i=0;i<rs2.size()-1;i++){
+				String sentPrincipal=TA.cantSentimientos(rs2.get(i).toString());
+				sentimientos.add(sentPrincipal);
 			}
+			int cant= determinarComentariosFelices(sentimientos);
+			comentariosFelices.add(cant);
+			actividades.add(ActividadID.get(r));	
 		}
+		ArrayList<Integer> array = ordenamiento(comentariosFelices,actividades);
+		return array;
+	}
+	
+public ArrayList<Integer> analisisComentariosEnojados() throws SQLException {
+		
+	ArrayList<Integer> ActividadID= obtenerInfoActividad();
+	ArrayList<Integer> comentariosEnojados= new ArrayList();
+	ArrayList<Integer> actividades= new ArrayList();
+	ToneAnalyzerService TA= new ToneAnalyzerService();
+	for(int r=0; r<ActividadID.size()-1 ;r++) {
+		ArrayList rs2=analisisComentario(ActividadID.get(r));
+		ArrayList <String> sentimientos = new ArrayList();
+		for(int i=0;i<rs2.size()-1;i++){
+			String sentPrincipal=TA.cantSentimientos(rs2.get(i).toString());
+			sentimientos.add(sentPrincipal);
+		}
+		int cant= determinarComentariosEnojados(sentimientos);
+		comentariosEnojados.add(cant);
+		actividades.add(ActividadID.get(r));	
+	}
+	ArrayList<Integer> array = ordenamiento(comentariosEnojados,actividades);
+	return array;
+}
+		
 
 
 
 	public ArrayList<Integer> ordenamiento(ArrayList<Integer> sentimientos2, ArrayList<Integer> sentimientos1) {
-
+		
 		int i=0;
 	    int max = i;
 	    int maxN=i;
+	    int contadorT=sentimientos2.size();
+	    while (contadorT!=0) {
+	    	i=0;
 	    for (int j = i + 1 ; j< sentimientos2.size() ; j++) {
-
 	        if (sentimientos2.get(j)> sentimientos2.get(max)) {
 	            int ant = i;  
 	            int valor=sentimientos2.get(i);
@@ -352,14 +356,15 @@ public void agregarComentario(String idActividad,String descripcion) throws SQLE
 	            j=j-1;
 	           }
 	        else {
-	        	i++;
-	        	
-	        }
+	        	i++;}
 	      }
+	    contadorT=contadorT-1;
+	    }
 	    int contador3=0;
 	    while(contador3< sentimientos1.size()) {
 	    	System.out.println(sentimientos1.get(contador3));
 	    	System.out.println(sentimientos2.get(contador3));
+	    	contador3++;
 	    }
 	    ArrayList array= new ArrayList<>();
 	    array.add(sentimientos1);
