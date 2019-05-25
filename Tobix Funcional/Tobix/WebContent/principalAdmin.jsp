@@ -69,6 +69,12 @@
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
+					<div class="wrap-input100 validate-input" >
+						<span class="label-input100">Ver  Bitacoras</span>		
+						<div class="" align="center"><a href="principalBitacora.jsp">Bitacora </div>						
+						<span class="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>

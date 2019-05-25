@@ -89,7 +89,7 @@ public ResultSet listarSegunParticipantesConfirmados() throws SQLException {
 	ResultSet rs =obtener.listarActividadesPorParticipantesConfirmados();
 	return rs;
 }
-public ArrayList analisisComentario(int actividad) throws SQLException {
+public ArrayList<String> analisisComentario(int actividad) throws SQLException {
 	ResultSet rs=obtener.selectComentarios(actividad);
 	ArrayList<String> comentarios = new ArrayList<>();
 	int contador=1; 

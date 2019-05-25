@@ -31,7 +31,7 @@ public class ToneAnalyzerService {
 				System.out.println("salio");
 		return extraerSentimientoPrincipal(toneAnalysis);
 	}
-	public void detectarFrases(String comentario) {
+	public ArrayList<String> detectarFrases(String comentario) {
 		ArrayList<String> frase= new ArrayList();
 		ArrayList<String> sentimiento= new ArrayList();
 		ArrayList<ArrayList> res= new ArrayList();
@@ -47,12 +47,11 @@ public class ToneAnalyzerService {
 					 frase.add(toneAnalysis.getSentencesTone().get(i).getText());
 					 sentimiento.add(toneAnalysis.getSentencesTone().get(i).getTones().get(0).getToneName());
 				 }
-				res.add(frase);
-				res.add(sentimiento);
-				System.out.println(res.get(1));
-				System.out.println(res.get(0));
-				
-		
+				//res.add(frase);
+				//res.add(sentimiento);
+				//System.out.println(res.get(1));
+				//System.out.println(res.get(0));		
+		return sentimiento;
 	}
 	private static ArrayList<String> extraerSentimientoPrincipal(ToneAnalysis tone) {
 		System.out.println("Entro1");
