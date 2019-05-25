@@ -239,6 +239,12 @@ public class ObtenerInformacion {
 			}
 			return tipo;
 		}
+		public ResultSet selectHistorial() throws SQLException {
+			String select = "select * from bitacora";
+			ResultSet rs = ejecutarSelect(select);
+			
+			return rs;
+		}
 	
 		
 		public ResultSet ejecutarSelect(String query) throws SQLException {

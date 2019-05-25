@@ -9,5 +9,22 @@
 	<classpathentry kind="lib" path="Tobix/WebContent/WEB-INF/lib/javax.servlet.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javax.mail-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/javax.servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/language-translator-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/natural-language-classifier-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/natural-language-understanding-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/personality-insights-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/tone-analyzer-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/speech-to-text-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/assistant-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/assistant-6.5.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/aws-java-sdk.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/conversation-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/core-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/java-sdk-6.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/org.json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dayav/OneDrive/Escritorio/poi-3.9.jar/poi-3.9.jar"/>
 	<classpathentry kind="output" path="Tobix/target/classes"/>
 </classpath>

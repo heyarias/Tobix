@@ -3,6 +3,7 @@ package org.tec.tobix.logicaIntegracion;
 import java.util.logging.LogManager;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -68,7 +69,7 @@ public class Watson {
 		return chat;
 	}
 	
-	public String getOutput(MessageResponse response)
+	public String getOutput(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONArray outputObj = new JSONObject(jsonResponse.get("output").toString()).getJSONArray("text");
@@ -77,7 +78,7 @@ public class Watson {
 	}
 	
 	
-	public String getResultado(MessageResponse response)
+	public String getResultado(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONArray outputObj = (JSONArray) jsonResponse.get("entities");
@@ -92,7 +93,7 @@ public class Watson {
 		}
 		return date;
 	}
-	public String getVariable(MessageResponse response)
+	public String getVariable(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONArray outputObj = (JSONArray) jsonResponse.get("entities");
@@ -106,10 +107,13 @@ public class Watson {
 		//System.out.println(response);
 		return date;
 	}
-	public String getIdActividad(MessageResponse response)
+	public String getIdActividad(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
-		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
+		JSONObject outputObj;
+		
+			outputObj = new JSONObject(jsonResponse.get("context").toString());
+	
 		String idActividad = null;
 		if(outputObj.has("idEvento")) 
 		{
@@ -118,7 +122,7 @@ public class Watson {
 		return idActividad;
 	}
 	
-	public String getIdPersona(MessageResponse response)
+	public String getIdPersona(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
@@ -130,7 +134,7 @@ public class Watson {
 		return idPersona;
 	}
 	
-	public String getConfirmado(MessageResponse response)
+	public String getConfirmado(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
@@ -146,7 +150,7 @@ public class Watson {
 		return this.response;
 	}
 	
-	public Object askWatson(String ask)
+	public Object askWatson(String ask) throws JSONException
 	{		
 		this.context = this.response.getContext();
 		InputData input = new InputData.Builder(ask).build();
@@ -177,7 +181,7 @@ public class Watson {
 		
 		return this.response;
 	}
-	public String getWatsonMessage() {
+	public String getWatsonMessage() throws JSONException {
 	    MessageResponse msg = null;
 	
 		String mensaje;	
