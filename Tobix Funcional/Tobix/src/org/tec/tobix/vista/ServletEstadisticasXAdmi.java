@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.tec.tobix.dao.ObtenerInformacion;
 import org.tec.tobix.logicaIntegracion.FlujoWatson;
+import org.tec.tobix.logicaIntegracion.ToneAnalyzerService;
 import org.tec.tobix.logicaNegocio.Actividad;
 
 
@@ -29,6 +30,7 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 	private ResultSet rs = null;
 	ObtenerInformacion data = new ObtenerInformacion();
 	Actividad act = new Actividad();
+	ToneAnalyzerService tone = new ToneAnalyzerService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -123,14 +125,19 @@ public class ServletEstadisticasXAdmi extends HttpServlet {
 			}
 			else if(query.equals("Sentimientos")) {
 			try {
-				ArrayList<ArrayList> f = act.analisisComentario(id);
+				ArrayList<String> f = act.analisisComentario(id);
 				int i = 0;
 				while(i<f.size()) {
-					ArrayList comentario = f.get(i);
-					System.out.println( comentario.get(0));
-					System.out.println( comentario.get(1));
-					mensaje += "Comentario: "+ comentario.get(0) + "Sentimientos: "+ comentario.get(1) + "\n"; 
+					String comentario = f.get(i);
+					System.out.println( comentario);
+					ArrayList sentimientos = tone.detectarFrases(comentario);	
+					mensaje += "Comentario: "+ comentario + "Sentimientos: "; 
 					i++;
+					int y = 0;
+					while(y < sentimientos.size()) {
+						mensaje += sentimientos.get(y) + ", "; 
+						y++;
+					}
 					
 				}
 			} catch (SQLException e) {

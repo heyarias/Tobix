@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import org.json.JSONObject;
+import org.tec.tobix.dao.InsertarInformacion;
 import org.tec.tobix.dao.ObtenerInformacion;
 import org.tec.tobix.util.Calendario;
 import org.tec.tobix.util.translate;
@@ -19,13 +20,29 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class silohay {
 	
-	static translate t = new translate();
+	static InsertarInformacion data = new InsertarInformacion();
 	public static void main(String[] args) throws IOException, SQLException{
-
-	//String text = translate.translate("Su participacion a la actividad 7 ha sido confirmada."+"\n" +"Gracias por elegirnos ");
-	//System.out.println(text);
-	ToneAnalyzerService act= new ToneAnalyzerService();
-	act.detectarFrases("I hate so much this ugly experience. The places was awful, but all the colors presents was perfects");
+		String mensaje = "Hubo un error";	
+		MessageResponse response1;
+		String ask = "consul";
+		Watson w = Watson.getSingletonInstance();
+		MessageResponse msg = (MessageResponse) w.startWatson();
+		
+			response1 = w.askWatsonMe("consultar");
+			mensaje = w.getWatsonMessage();
+			String variable = w.getVariable(response1);
+			String value = w.getResultado(response1);
+			System.out.println("Variable:  " + variable);
+			System.out.println("Value: "+ value);
+			
+			response1 = w.askWatsonMe("tec");
+			mensaje = w.getWatsonMessage();
+		    variable = w.getVariable(response1);
+			value = w.getFecha(response1);
+			System.out.println("Variable:  " + variable);
+			System.out.println("Value: "+ value);
+		
+		
 	}
 	
 	}

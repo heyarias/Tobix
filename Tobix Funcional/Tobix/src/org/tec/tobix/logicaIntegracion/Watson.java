@@ -107,33 +107,92 @@ public class Watson {
 		//System.out.println(response);
 		return date;
 	}
-	public String getIdActividad(MessageResponse response) throws JSONException
+	public String getTipoEvento(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONObject outputObj;
 		
 			outputObj = new JSONObject(jsonResponse.get("context").toString());
 	
-		String idActividad = null;
-		if(outputObj.has("idEvento")) 
+		String evento = null;
+		if(outputObj.has("tipoEvento")) 
 		{
-			idActividad = outputObj.get("idEvento").toString();
+			evento = outputObj.get("tipoEvento").toString();
+			System.out.println(evento);
 		}
-		return idActividad;
+		return evento;
 	}
 	
-	public String getIdPersona(MessageResponse response) throws JSONException
+	public String getFranja(MessageResponse response) throws JSONException
+	{
+		JSONObject jsonResponse = new JSONObject(response);
+		JSONObject outputObj;
+		
+			outputObj = new JSONObject(jsonResponse.get("context").toString());
+	
+		String  franja = null;
+		if(outputObj.has("franja")) 
+		{
+			franja = outputObj.get("franja").toString();
+			System.out.println(franja);
+		}
+		return franja;
+	}
+	public String getEncargado(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
 		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
-		String idPersona = null;
-		if(outputObj.has("idPersona")) 
+		String encargado = null;
+		if(outputObj.has("encargado")) 
 		{
-			idPersona = outputObj.get("idPersona").toString();
+			encargado = outputObj.get("encargado").toString();
+			System.out.println(encargado);
 		}
-		return idPersona;
+		
+		return encargado;
 	}
 	
+	public String getEmpresa(MessageResponse response) throws JSONException
+	{
+		JSONObject jsonResponse = new JSONObject(response);
+		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
+		String empresa = null;
+		if(outputObj.has("empresa")) 
+		{
+			empresa = outputObj.get("empresa").toString();
+			System.out.println(empresa);
+		}
+		
+		return empresa;
+	}
+	
+	public String getTematica(MessageResponse response) throws JSONException
+	{
+		JSONObject jsonResponse = new JSONObject(response);
+		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
+		String tematica = null;
+		if(outputObj.has("tematica")) 
+		{
+			tematica = outputObj.get("tematica").toString();
+			System.out.println(tematica);
+		}
+		
+		return tematica;
+	}
+	
+	public String getFecha(MessageResponse response) throws JSONException
+	{
+		JSONObject jsonResponse = new JSONObject(response);
+		JSONObject outputObj = new JSONObject(jsonResponse.get("context").toString());
+		String fecha = null;
+		if(outputObj.has("sys-date")) 
+		{
+			fecha = outputObj.get("sys-date").toString();
+			System.out.println(fecha);
+		}
+		
+		return fecha;
+	}
 	public String getConfirmado(MessageResponse response) throws JSONException
 	{
 		JSONObject jsonResponse = new JSONObject(response);
