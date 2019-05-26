@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.tec.tobix.dao.InsertarInformacion;
 import org.tec.tobix.dao.ObtenerInformacion;
+import org.tec.tobix.logicaIntegracion.EnvioCorreos;
 import org.tec.tobix.logicaIntegracion.FlujoWatson;
 import org.tec.tobix.logicaIntegracion.Watson;
 import org.tec.tobix.logicaNegocio.Comentario;
@@ -29,10 +31,11 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 @WebServlet("/ServletChatBot")
 public class ServletChatBot extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private FlujoWatson flujo = new FlujoWatson();
+	//private FlujoWatson flujo = new FlujoWatson();
 	private Calendario calendar = new Calendario();
 	ObtenerInformacion data = new ObtenerInformacion();
 	InsertarInformacion info = new InsertarInformacion();
+	private EnvioCorreos correos = new EnvioCorreos();
        
 	private String mensaje; 
 	private String cedula;
@@ -41,6 +44,7 @@ public class ServletChatBot extends HttpServlet {
 	private String comentario ;
 	private String filtro ;
 	private String accion;
+	private String booleano;
 	
 
        
@@ -77,8 +81,9 @@ public class ServletChatBot extends HttpServlet {
 		mensaje = w.getWatsonMessage();
 		variable = w.getVariable(response1);
 		value = w.getResultado(response1);
-		
+		System.out.println("Variable:  " + variable);
 		System.out.println("Value: "+ value);
+		//booleano = "si";
 		//servletE = w.askWatson(ask);
 		/*do{
 			
@@ -105,18 +110,59 @@ public class ServletChatBot extends HttpServlet {
 			accion = value;
 		}
 		
-		if(accion.equals("Registrar")) {
-			if(cedula == null) {
+		if(accion.equals("registrar")) {
+			if( value.equals("registrar")) {
+				System.out.println(" ");
+			}
+			else if(cedula == null ) {
 				cedula = value;
 			}
-			else {
+			else if(filtro == null) {
+					filtro = value;
+					System.out.println("filtro ");
+			}else if(idActividad == null) {
 				idActividad= value;
-				
+			}
+			else if(booleano == null) {
+				booleano = value;
+			}
+			 else {
+				 try {
+					 String hora;
+					 hora = data.selectHoraInicio(idActividad);
+					String dia = data.selectFecha(idActividad);
+						if (calendar.diaVrsDia(dia) != true ) {				
+							try {
+								int Actividad = Integer.parseInt(idActividad);
+								info.insertarParticipantes(cedula, Actividad);
+								System.out.println("Insertar Participantes'");
+
+								if(booleano.equals("si")) {
+									info.insertarParticipantesConfirmados(cedula, Actividad);		
+									String email = data.getEmail(cedula);
+									correos.EnviarCorreo(idActividad , email);						
+									System.out.println(" Se envio");
+									}
+								}
+								catch(Exception e) {			
+					  			System.out.println(e);
+							}
+						}else {
+						}
+					}
+				 catch(Exception e) {
+					 System.out.println(e);
+					 System.out.println("La actividad que desea registrar ya paso de dia , por ende no puede comentar'");
+				  	}
+				 }			
 			}
 			//reset values
-		}
 		else if(accion.equals("comentar")) {
-			if(idActividad == null){
+			if(cedula == null) {
+				cedula = value;
+				//System.out.println("cedula ");
+			}
+			else if(idActividad == null){
 				idActividad = value;
 			}
 			else {
@@ -144,7 +190,76 @@ public class ServletChatBot extends HttpServlet {
 			}
 			
 		}
-		else if(accion.equals("Consultar")) {
+		else if(accion.equals("consultar")) {
+			String encargado = w.getEncargado(response1);
+			String franja = w.getFranja(response1);
+			String fecha = w.getFecha(response1);
+			String tipo = w.getTipoEvento(response1);
+			String empresa = null;
+			String tematica = null;
+			ResultSet resultado = null ;
+			if(fecha != null) {
+				try {
+					resultado = data.selectWatsonActividadesFecha(filtro);
+					mensaje = crearMensaje(resultado,10);
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}else if(tipo != null ){
+				try {
+					resultado = data.selectActividadTipo(filtro);
+					mensaje = crearMensaje(resultado,10);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}else if (franja != null)  {
+				try {
+					resultado = data.selectWatsonActividadesFranja(filtro);
+					mensaje = crearMensaje(resultado,10);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			else if (empresa != null ) {
+				
+				try {
+					resultado = data.selectWatsonActividadesEmpresa(filtro);
+					mensaje = crearMensaje(resultado,10);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (tematica != null) {
+				try {
+					resultado = data.selectWatsonActividadesTematica(filtro);
+					System.out.print("Da resultado");
+					mensaje = crearMensaje(resultado,10);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			else if (encargado != null) {
+				try {
+					resultado = data.selectActividadXEncargados(filtro);
+					System.out.print("Da resultado");
+					mensaje = crearMensaje(resultado,10);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 			
 		}
 		
@@ -223,7 +338,20 @@ public class ServletChatBot extends HttpServlet {
 				"\r\n" + 
 				"");
 	}
-	
+	public String crearMensaje(ResultSet rs,int atributos) throws SQLException {
+		String mensaje = "idk";
+		System.out.println(rs);
+		while(rs.next()) {
+			int i = 1;
+			while(i-1<atributos) {
+				mensaje += rs.getString(i) + " ,";
+				i++;
+			}
+			mensaje += "\n";
+		}
+		System.out.println(mensaje);
+		return mensaje;
+	}
 	
 
 }

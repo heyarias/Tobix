@@ -54,9 +54,7 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 		try {
 			hora = data.selectHoraInicio(Act);
 			String dia = data.selectFecha(Act);
-			if (calendar.diaVrsDia(dia) !=true ) {
-					
-				
+			if (calendar.diaVrsDia(dia) != true ) {				
 				String confirmar = request.getParameter("confirmar").toString();
 				if (id == null) {	
 					RequestDispatcher dispatcher = request.getRequestDispatcher("addParticipanteActividad.jsp");
@@ -64,17 +62,13 @@ public class ServletAddParticipanteActividad extends HttpServlet {
 				}
 				else {
 					try {
-						//RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-						//dispatcher.forward(request, response);
 						insertar.insertarParticipantes(id, idAct);
 						if(confirmar.equals("SI")) {
 							insertar.insertarParticipantesConfirmados(id, idAct);		
 							String email = data.getEmail(id);
 								correos.EnviarCorreo(Act , email);						
 							System.out.println(" Se envio");
-							
 						}
-
 					}
 					catch(Exception e) {			
 		  			System.out.println(e);
