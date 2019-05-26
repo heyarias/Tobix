@@ -131,16 +131,8 @@ public ResultSet consultarEncargado(int act) throws SQLException {
 	return rs; 
 	
 }
-public void consultarComentariosFelices() throws SQLException {
-	ResultSet rs= obtener.selectActividadIDNombre();
-	 while(rs.next()) {
-		int idActividad= rs.getInt(1);
-		String nombre= rs.getString(2);
-}}
-public void calcularInicio(int idActividad) {
 
-}
-	
+
 /**
  * El metodo asocia comentarios del usuario a una actividad
  * @param descripcion

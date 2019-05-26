@@ -1,5 +1,7 @@
 package org.tec.tobix.logicaIntegracion;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,7 +29,7 @@ public class XML extends Bitacora
 	
 	public XML() 
 	{
-		this.setRuta("C:\\Bitacoras\\XML.xml");
+		this.setRuta("C:\\Users\\dayav\\OneDrive\\Escritorio\\XML.xml");
 	}
 
 
@@ -92,14 +94,24 @@ public class XML extends Bitacora
 		        //Generate XML
 		        Source source = new DOMSource(raiz);
 		        //Indicamos donde lo queremos almacenar
-		     
-		        rutaArchivo = "C:\\Bitacoras\\"+name+".xml";
+		        rutaArchivo = "C:\\Users\\dayav\\OneDrive\\Escritorio\\"+name+".xml";
 		        
 		        Result result = new StreamResult(new java.io.File(rutaArchivo)); //nombre del archivo
 		        Transformer transformer = TransformerFactory.newInstance().newTransformer();
 		        transformer.transform(source, result);
 		     
-		    }
+		    }}
+		    public ArrayList<String> Leer() {
+		    	ArrayList<String> array= new ArrayList();
+				BufferedReader br = null;
+			      try {
+			    	  br =new BufferedReader(new FileReader("C:\\\\Users\\\\dayav\\\\OneDrive\\\\Escritorio\\\\XML.xml"));
+			    	  array.add(br.readLine());
+			    //Se crea un SAXBuilder para poder parsear el archivo
+			    }finally{
+			    	
+			    	return array;
+			    }}
+		    
 		}
 
-}
