@@ -34,7 +34,7 @@ public class ObtenerInformacion {
 			ResultSet rs=ejecutarSelect(select);
 		}
 		public int selectIdActividad(String nombre, String tipo) throws SQLException {
-			String select = "select idActividad from Actividad where nombre='"+nombre+"' and tipo='"+tipo+"'";
+			String select = "select idActividad from Actividad where nombre= '"+nombre+"' and tipo='"+tipo+"'";
 			ResultSet rs = ejecutarSelect(select);
 			while(rs.next()) {
 				return rs.getInt(1);
@@ -43,7 +43,7 @@ public class ObtenerInformacion {
 		}
 
 		public ResultSet selectActividadTipo(String tipo) throws SQLException {
-				String select = "select * from Actividad where tipo=+'"+tipo+"'";
+				String select = "select * from Actividad where tipo = '"+tipo+"'";
 				ResultSet rs = ejecutarSelect(select);
 				return rs;
 		}

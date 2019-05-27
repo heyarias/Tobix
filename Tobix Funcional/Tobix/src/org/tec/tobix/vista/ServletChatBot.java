@@ -195,13 +195,13 @@ public class ServletChatBot extends HttpServlet {
 			String franja = w.getFranja(response1);
 			String fecha = w.getFecha(response1);
 			String tipo = w.getTipoEvento(response1);
-			String empresa = null;
-			String tematica = null;
+			String empresa = w.getEmpresa(response1) ;
+			String tematica = w.getTematica(response1);
 			ResultSet resultado = null ;
 			if(fecha != null) {
 				try {
-					resultado = data.selectWatsonActividadesFecha(filtro);
-					mensaje = crearMensaje(resultado,10);
+					resultado = data.selectWatsonActividadesFecha(fecha);
+					mensaje = crearMensaje(resultado,7);
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -211,8 +211,8 @@ public class ServletChatBot extends HttpServlet {
 				
 			}else if(tipo != null ){
 				try {
-					resultado = data.selectActividadTipo(filtro);
-					mensaje = crearMensaje(resultado,10);
+					resultado = data.selectActividadTipo(tipo);
+					mensaje = crearMensaje(resultado,7);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -220,8 +220,8 @@ public class ServletChatBot extends HttpServlet {
 				
 			}else if (franja != null)  {
 				try {
-					resultado = data.selectWatsonActividadesFranja(filtro);
-					mensaje = crearMensaje(resultado,10);
+					resultado = data.selectWatsonActividadesFranja(franja);
+					mensaje = crearMensaje(resultado,7);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -231,8 +231,8 @@ public class ServletChatBot extends HttpServlet {
 			else if (empresa != null ) {
 				
 				try {
-					resultado = data.selectWatsonActividadesEmpresa(filtro);
-					mensaje = crearMensaje(resultado,10);
+					resultado = data.selectWatsonActividadesEmpresa(empresa);
+					mensaje = crearMensaje(resultado,7);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -240,9 +240,9 @@ public class ServletChatBot extends HttpServlet {
 			}
 			else if (tematica != null) {
 				try {
-					resultado = data.selectWatsonActividadesTematica(filtro);
+					resultado = data.selectWatsonActividadesTematica(tematica);
 					System.out.print("Da resultado");
-					mensaje = crearMensaje(resultado,10);
+					mensaje = crearMensaje(resultado,7);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -251,9 +251,9 @@ public class ServletChatBot extends HttpServlet {
 			}
 			else if (encargado != null) {
 				try {
-					resultado = data.selectActividadXEncargados(filtro);
+					resultado = data.selectActividadXEncargados(encargado);
 					System.out.print("Da resultado");
-					mensaje = crearMensaje(resultado,10);
+					mensaje = crearMensaje(resultado,7);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
