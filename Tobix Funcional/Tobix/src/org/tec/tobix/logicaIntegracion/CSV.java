@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -23,11 +25,11 @@ public class CSV extends Bitacora {
 	
 	private static int cont=0;
 	ObtenerInformacion obtener= new ObtenerInformacion();
-	 public static final String separador=";";
-	  public static final String slash="\"";
+	 private  String separador=";";
+	  private static   String slash="\'";
 	public CSV() 
 	{
-		this.setRuta("C:\\Bitacoras\\CSV.csv");
+		this.setRuta("C:\\Users\\dayav\\OneDrive\\Escritorio\\CSV.csv");
 		
 	}
 	
@@ -36,6 +38,7 @@ public class CSV extends Bitacora {
 	{
 		ResultSet res = obtener.selectHistorial();
 	    File archivoCSV = new File(this.getRuta());
+	    System.out.println(this.getRuta());
 	    if(archivoCSV.exists()) archivoCSV.delete();
 	    archivoCSV.createNewFile();
 	    Workbook libro = new HSSFWorkbook();
@@ -67,23 +70,23 @@ public class CSV extends Bitacora {
         cont++;
 		}
 	}
-	public String leerCSV() throws SQLException, ParseException, IOException {
+	public ArrayList<String> leer() {
 		ObtenerInformacion ob=new ObtenerInformacion();
 		BufferedReader br = null;
-		String array=null;
+		ArrayList<String> array=new ArrayList();
 	      try {br =new BufferedReader(new FileReader(this.getRuta()));
 	         String line = br.readLine();
 	         while (null!=line) {
 	            String [] fields = line.split(separador);
-	            array=Arrays.toString(fields);  
+	            array.add(Arrays.toString(fields));  
 	            fields = divisionCSV(fields);
 	            line = br.readLine();
 	         }System.out.println(array);
 	         return array;
 	        		 } catch (Exception e) { }
 	     finally {
-	         if (null!=br) {
-	            br.close();}}return array;}
+	         
+	          }return array;}
 	
 	 private static String[] divisionCSV(String[] fields) {
 	      String result[] = new String[fields.length];
