@@ -101,7 +101,7 @@ public class XML extends Bitacora
 		        transformer.transform(source, result);
 		     
 		    }}
-		    public ArrayList<String> Leer() {
+		    public ArrayList<String> leer() {
 		    	ArrayList<String> array= new ArrayList();
 				BufferedReader br = null;
 			      try {
@@ -109,9 +109,10 @@ public class XML extends Bitacora
 			    	  array.add(br.readLine());
 			    //Se crea un SAXBuilder para poder parsear el archivo
 			    }finally{
-			    	
-			    	return array;
+			    	return array;	
 			    }}
-		    
+
+
+		
 		}
 
