@@ -27,13 +27,10 @@ public class CSV extends Bitacora {
 	ObtenerInformacion obtener= new ObtenerInformacion();
 	 private  String separador=";";
 	  private static   String slash="\'";
-	public CSV() 
+	public CSV(String ruta) 
 	{
-		this.setRuta("C:\\Users\\dayav\\OneDrive\\Escritorio\\CSV.csv");
-		
+		this.setRuta(ruta+"\\CSV.csv");	
 	}
-	
-
 	public void update() throws Exception 
 	{
 		ResultSet res = obtener.selectHistorial();
@@ -86,7 +83,8 @@ public class CSV extends Bitacora {
 	        		 } catch (Exception e) { }
 	     finally {
 	         
-	          }return array;}
+	          }System.out.println(array);
+	      return array;}
 	
 	 private static String[] divisionCSV(String[] fields) {
 	      String result[] = new String[fields.length];

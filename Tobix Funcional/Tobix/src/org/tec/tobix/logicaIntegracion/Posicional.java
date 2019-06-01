@@ -17,9 +17,9 @@ public class Posicional  extends Bitacora
 {	
 	
 	ObtenerInformacion obtener= new ObtenerInformacion();
-	public Posicional() 
+	public Posicional(String ruta) 
 	{
-		this.setRuta("C:\\Users\\dayav\\OneDrive\\Escritorio\\Posicional.txt");
+		this.setRuta(ruta+"\\Posicional.txt");
 		
 	}	
 	@Override
@@ -29,8 +29,8 @@ public class Posicional  extends Bitacora
 		String msg = null;
 		while (res.next())
 		{
-			msg += "Fecha: "+res.getString(1)+",Hora: "+res.getString(2)
-				+  ",Accion: "+res.getString(3);
+			msg += "Fecha: "+res.getString(1)+"\n"+"Hora: "+res.getString(2)
+				+"\n"+  "Accion: "+res.getString(3)+"\n";
 		}
 		escribir.write(msg);
 		escribir.close();
@@ -41,12 +41,15 @@ public class Posicional  extends Bitacora
         BufferedReader buffered = null;
         ArrayList<String> lineas= new ArrayList();
         try {
-			file = new File ("C:\\Users\\dayav\\OneDrive\\Escritorio\\Semestre VII\\Diseño\\ScripProgra.txt");
+			file = new File (this.getRuta());
 			fileReader = new FileReader (file);
 			buffered= new BufferedReader(fileReader);
 			String linea;
 			while((linea=buffered.readLine())!=null) {
 			lineas.add(linea);}
+			for(int i=1;i<lineas.size();i++) {
+				System.out.println(lineas.get(i));
+			}
         	return lineas;
         }
         catch(Exception e){
