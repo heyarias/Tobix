@@ -111,6 +111,7 @@ public class XML extends Bitacora
 			    //Se crea un SAXBuilder para poder parsear el archivo
 			    }finally{
 			    	System.out.println(array);
+			    	System.out.println("JAAA");
 			    	return array;	
 			    }}
 

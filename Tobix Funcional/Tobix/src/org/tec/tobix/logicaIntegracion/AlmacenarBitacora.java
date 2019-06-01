@@ -23,8 +23,8 @@ public class AlmacenarBitacora{
 		cambiarMecanismoBitacora(new Posicional(ruta));
 		this.bitacora.update();
 	}
-	public void leer() {
-		this.bitacora.leer();
+	public ArrayList<String> leer() {
+		return bitacora.leer();
 	}
 	public void cambiarMecanismoBitacora(Bitacora bitacora)
 	{

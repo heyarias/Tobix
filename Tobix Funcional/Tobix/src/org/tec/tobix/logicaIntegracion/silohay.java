@@ -19,11 +19,12 @@ import com.ibm.db2.jcc.am.ResultSet;
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class silohay {
-	static String path="C:\\Users\\dayav\\OneDrive\\Escritorio";
+	static String path="C:\\Users\\Hazel\\Desktop";
 	static InsertarInformacion data = new InsertarInformacion();
 	public static void main(String[] args) throws Exception{
 	
-		AlmacenarBitacora bit= new AlmacenarBitacora(new Posicional(path));
+		AlmacenarBitacora bit= new AlmacenarBitacora(new XML(path));
+		//bit.update(path);
 		bit.leer();
 	}
 	
