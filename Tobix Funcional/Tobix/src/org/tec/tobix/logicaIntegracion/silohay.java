@@ -19,30 +19,12 @@ import com.ibm.db2.jcc.am.ResultSet;
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class silohay {
-	
+	static String path="C:\\Users\\dayav\\OneDrive\\Escritorio";
 	static InsertarInformacion data = new InsertarInformacion();
-	public static void main(String[] args) throws IOException, SQLException{
-		String mensaje = "Hubo un error";	
-		MessageResponse response1;
-		String ask = "consul";
-		Watson w = Watson.getSingletonInstance();
-		MessageResponse msg = (MessageResponse) w.startWatson();
-		
-			response1 = w.askWatsonMe("consultar");
-			mensaje = w.getWatsonMessage();
-			String variable = w.getVariable(response1);
-			String value = w.getResultado(response1);
-			System.out.println("Variable:  " + variable);
-			System.out.println("Value: "+ value);
-			
-			response1 = w.askWatsonMe("tec");
-			mensaje = w.getWatsonMessage();
-		    variable = w.getVariable(response1);
-			value = w.getFecha(response1);
-			System.out.println("Variable:  " + variable);
-			System.out.println("Value: "+ value);
-		
-		
+	public static void main(String[] args) throws Exception{
+	
+		AlmacenarBitacora bit= new AlmacenarBitacora(new Posicional(path));
+		bit.leer();
 	}
 	
 	}

@@ -27,9 +27,9 @@ public class XML extends Bitacora
 	private static String rutaArchivo;
 	
 	
-	public XML() 
+	public XML(String rutaR) 
 	{
-		this.setRuta("C:\\Users\\dayav\\OneDrive\\Escritorio\\XML.xml");
+		this.setRuta(rutaR+"XML.xml");
 	}
 
 
@@ -52,13 +52,13 @@ public class XML extends Bitacora
 		}
 	    try
 	    {
-			generate(nombre_archivo, key, value);
+			generate(nombre_archivo, key, value,this.getRuta());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	private static void generate(String name, ArrayList<String> key,ArrayList<String> value) throws Exception
+	private static void generate(String name, ArrayList<String> key,ArrayList<String> value, String ruta) throws Exception
 	{
 		    if(key.isEmpty() || value.isEmpty() || key.size()!=value.size())
 		    {
@@ -66,6 +66,7 @@ public class XML extends Bitacora
 		        return;
 		    }
 		    else{
+		    	
 		        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		        DocumentBuilder builder = factory.newDocumentBuilder();
 		        DOMImplementation implementation = builder.getDOMImplementation();
@@ -94,7 +95,7 @@ public class XML extends Bitacora
 		        //Generate XML
 		        Source source = new DOMSource(raiz);
 		        //Indicamos donde lo queremos almacenar
-		        rutaArchivo = "C:\\Users\\dayav\\OneDrive\\Escritorio\\"+name+".xml";
+		        rutaArchivo =ruta+"XML.xml";
 		        
 		        Result result = new StreamResult(new java.io.File(rutaArchivo)); //nombre del archivo
 		        Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -105,10 +106,11 @@ public class XML extends Bitacora
 		    	ArrayList<String> array= new ArrayList();
 				BufferedReader br = null;
 			      try {
-			    	  br =new BufferedReader(new FileReader("C:\\\\Users\\\\dayav\\\\OneDrive\\\\Escritorio\\\\XML.xml"));
+			    	  br =new BufferedReader(new FileReader(this.getRuta()+"XML.xml"));
 			    	  array.add(br.readLine());
 			    //Se crea un SAXBuilder para poder parsear el archivo
 			    }finally{
+			    	System.out.println(array);
 			    	return array;	
 			    }}
 

@@ -7,20 +7,24 @@ import java.util.ArrayList;
 
 
 public class AlmacenarBitacora{
-	private Bitacora bitacora= new XML();	
+	private Bitacora bitacora;	
 	public AlmacenarBitacora(Bitacora bitacora) 
 	{
 		this.bitacora = bitacora;
 	}
 
-	public void update() throws Exception
+	
+	public void update(String ruta) throws Exception
 	{
-		cambiarMecanismoBitacora(new XML());
+		cambiarMecanismoBitacora(new XML(ruta));
 		this.bitacora.update();
-		cambiarMecanismoBitacora(new CSV());
+		cambiarMecanismoBitacora(new CSV(ruta));
 		this.bitacora.update();
-		cambiarMecanismoBitacora(new Posicional());
+		cambiarMecanismoBitacora(new Posicional(ruta));
 		this.bitacora.update();
+	}
+	public void leer() {
+		this.bitacora.leer();
 	}
 	public void cambiarMecanismoBitacora(Bitacora bitacora)
 	{
