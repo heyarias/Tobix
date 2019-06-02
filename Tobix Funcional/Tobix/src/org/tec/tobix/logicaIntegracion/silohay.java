@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.JSONObject;
@@ -19,13 +20,24 @@ import com.ibm.db2.jcc.am.ResultSet;
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 
 public class silohay {
-	static String path="C:\\Users\\Hazel\\Desktop";
-	static InsertarInformacion data = new InsertarInformacion();
+	
 	public static void main(String[] args) throws Exception{
+		ToneAnalyzerService tone= new ToneAnalyzerService();
 	
-		AlmacenarBitacora bit= new AlmacenarBitacora(new XML(path));
-		//bit.update(path);
-		bit.leer();
-	}
+		Actividad act=new Actividad();
+		ArrayList<String> f = act.analisisComentario(2);
+		int i = 0;
+		while(i<f.size()) {
+			String comentario = f.get(i);
+			System.out.println( comentario);
+			ArrayList sentimientos = tone.detectarFrases("It was a very good day. The people was angry, but i was great");	
+			String mensaje = "Comentario: "+ comentario + "Sentimientos: "; 
+			i++;
+			int y = 0;
+			while(y < sentimientos.size()) {
+				mensaje += sentimientos.get(y) + ", "; 
+				y++;}
+		
+	}}}
 	
-	}
+	

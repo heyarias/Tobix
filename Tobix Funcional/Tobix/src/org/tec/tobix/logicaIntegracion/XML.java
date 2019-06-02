@@ -29,7 +29,8 @@ public class XML extends Bitacora
 	
 	public XML(String rutaR) 
 	{
-		this.setRuta(rutaR+"XML.xml");
+		this.setRuta(rutaR);
+		System.out.println(this.getRuta());
 	}
 
 
@@ -103,6 +104,7 @@ public class XML extends Bitacora
 		     
 		    }}
 		    public ArrayList<String> leer() {
+		    	
 		    	ArrayList<String> array= new ArrayList();
 				BufferedReader br = null;
 			      try {

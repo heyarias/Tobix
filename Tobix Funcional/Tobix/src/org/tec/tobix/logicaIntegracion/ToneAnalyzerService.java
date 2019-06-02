@@ -27,10 +27,11 @@ public class ToneAnalyzerService {
 				  .build();
 				ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute();
 				System.out.println("Sentences tone");
-				System.out.println(toneAnalysis.getSentencesTone().get(0));
+				
 				System.out.println("salio");
 		return extraerSentimientoPrincipal(toneAnalysis);
 	}
+	
 	public ArrayList<String> detectarFrases(String comentario) {
 		ArrayList<String> frase= new ArrayList();
 		ArrayList<String> sentimiento= new ArrayList();
@@ -43,8 +44,11 @@ public class ToneAnalyzerService {
 				  .text(text)
 				  .build();
 				ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute();
+				 System.out.println("se cae");
+				
 				 for(int i=0; i<=toneAnalysis.getSentencesTone().size()-1;i++) {
 					 frase.add(toneAnalysis.getSentencesTone().get(i).getText());
+					 System.out.println(toneAnalysis.getSentencesTone().get(i).getTones().get(0).getToneName());
 					 sentimiento.add(toneAnalysis.getSentencesTone().get(i).getTones().get(0).getToneName());
 				 }
 				//res.add(frase);

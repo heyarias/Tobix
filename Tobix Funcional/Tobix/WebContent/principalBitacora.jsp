@@ -39,6 +39,7 @@
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <select name="bitacora" id= "bitacora">
                                     <option disabled="disabled" selected="selected">Escoja el formato deseado</option>
+                                    <option value = "act">Actualizar</option>
                                     <option value = "trama">Ver bitacora en trama plana</option>
                                     <option value = "csv">Ver bitacora en CSV</option> 
                                     <option value = "xml">Ver bitacora en XML</option>    

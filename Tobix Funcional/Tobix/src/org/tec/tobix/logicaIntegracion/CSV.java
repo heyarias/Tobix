@@ -56,6 +56,7 @@ public class CSV extends Bitacora {
         celda2.setCellValue("Acción");
 	}
 	private void agregarFilas(ResultSet res, Sheet hoja) throws SQLException {
+		cont=2;
 		while(res.next()) {
 		Row fila = hoja.createRow(cont);
         Cell celda3 = fila.createCell(1);
